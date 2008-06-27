@@ -203,6 +203,7 @@ namespace Aqua.Admin
             if (dr == DialogResult.Yes)
             {
                 this.library.DeleteBarcodeCustomer(textBoxBarCode.Text.Trim(), textBoxAbbreviation.Text.Trim());
+                this.library.DeleteBarcodeHistory(textBoxBarCode.Text.Trim());
                 MainLibrary.dummyFrm.MsgBoxInformation("Διεγράφη με επιτυχία!", "Διαγραφή");
                 this.buttonNewCust_Click(sender, e);
             }

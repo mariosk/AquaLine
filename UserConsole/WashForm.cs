@@ -13,6 +13,7 @@ namespace Aqua.User
     {
         private MainLibrary library;
         private List<OffersObject> offers;
+        private int selectedOffer;
 
         public WashForm(MainLibrary library)
         {
@@ -30,7 +31,7 @@ namespace Aqua.User
             this.pictureBoxCustomer.Image = library.getCustImage();            
         }
 
-        private void FindUserInDatabase()
+        private bool FindUserInDatabase()
         {
             BarcodeCustomerObject barcodeCust;
             CustomerObject customerO;
@@ -42,10 +43,10 @@ namespace Aqua.User
             customerO.LicensePlates = null;
 
             Object[] custObjects = this.library.GetCustomerWithBarcodeId(this.textBoxBarCode.Text.Trim());
-            if (custObjects == null)
+            if (custObjects == null || (custObjects[0] == null && custObjects[1] == null))
             {
                 MainLibrary.dummyFrm.MsgBoxError("Δεν υπάρχει πελάτης με αυτή τη κάρτα! Πρέπει να ενεργοποιήσετε τη κάρτα σας.");
-                return;
+                return false;
             }
 
             if (custObjects[0] != null)
@@ -62,6 +63,7 @@ namespace Aqua.User
                     if (this.offers[i].Id.Equals(barcodeCust.OfferId))
                     {
                         this.textBoxOffer.Text = this.offers[i].Desc;
+                        this.selectedOffer = i;
                         break;
                     }
                 }
@@ -82,15 +84,50 @@ namespace Aqua.User
                 if (this.comboBoxLicensePlates.Items.Count > 0)
                     this.comboBoxLicensePlates.SelectedIndex = 0;
             }
+
+            return true;
+        }
+
+        private void ClearAllTextBoxes(bool clearBarcodeToo)
+        {
+            if (clearBarcodeToo)
+                this.textBoxBarCode.Text = "";
+            this.textBoxCustomerName.Text = "";
+            this.textBoxDateRegistered.Text = "";
+            this.textBoxWashesLeft.Text = "";
+            this.comboBoxLicensePlates.Text = "";
+            this.textBoxOffer.Text = "";
+            this.comboBoxLicensePlates.Items.Clear();
+            this.dataGridViewHistory.DataSource = null;
+            this.dataGridViewHistory.Refresh();
         }
 
         private void textBoxBarCode_TextChanged(object sender, EventArgs e)
-        {
+        {            
+            //MainLibrary.dummyFrm.MsgBox("changed to " + this.textBoxBarCode.Text);
             if (MainLibrary.dummyFrm.IsTextBoxReady())
             {
-                FindUserInDatabase();
-                //MainLibrary.dummyFrm.MsgBox("changed to " + this.textBoxBarCode.Text);
-                this.dataGridViewHistory.DataSource = library.GetCustomerHistory(textBoxBarCode.Text.Trim());
+                this.ClearAllTextBoxes(false);
+                if (!this.textBoxBarCode.Text.Trim().Equals(""))
+                {
+                    if (FindUserInDatabase())
+                    {
+                        DataTable dbTable = library.GetCustomerHistory(textBoxBarCode.Text.Trim());
+                        this.dataGridViewHistory.DataSource = dbTable;
+                        int offerVisits = this.library.GetNumberOfVisits(this.offers[this.selectedOffer].Id);
+                        int visitsLeft = offerVisits - dbTable.Rows.Count;                        
+                        this.textBoxWashesLeft.Text = visitsLeft.ToString();
+                        if (visitsLeft <= 0)
+                        {
+                            this.buttonWash.Enabled = false;
+                            MainLibrary.dummyFrm.MsgBoxError("Δυστυχώς δεν έχετε άλλες πλύσεις. Πρέπει να ανανεώσετε τη κάρτα σας!");
+                        }
+                        else
+                        {
+                            this.buttonWash.Enabled = true;
+                        }
+                    }
+                }
             }
         }
 
@@ -98,20 +135,21 @@ namespace Aqua.User
         {
             if (textBoxBarCode.Text.Trim().Equals(""))
             {
-                MainLibrary.dummyFrm.MsgBoxError("Πρέπει να περάσετε μια κάρτα από το scanner.!");
+                MainLibrary.dummyFrm.MsgBoxError("Πρέπει να περάσετε μια κάρτα από το scanner!");
                 return;
             }
 
             DialogResult dr = MainLibrary.dummyFrm.MsgBoxQuestion("Είστε σίγουροι για το πλύσιμο;");
             if (dr == DialogResult.Yes)
             {
-                if (this.library.InsertIntoBarcodeHistory(textBoxBarCode.Text.Trim()))                    
+                if (this.library.InsertIntoBarcodeHistory(textBoxBarCode.Text.Trim(), this.offers[this.selectedOffer].Id))                    
                     MainLibrary.dummyFrm.MsgBoxInformation("Καταχωρήθηκε μια πλύση με επιτυχία!", "Καταχώρηση");
             }
             else
             {
                 return;
             }
+            this.ClearAllTextBoxes(true);
         }
     }
 }

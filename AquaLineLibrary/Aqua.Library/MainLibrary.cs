@@ -49,7 +49,8 @@ namespace Aqua.Library
             }
             catch (Exception ex)
             {
-                MainLibrary.dummyFrm.MsgBoxError(ex.ToString());
+                MainLibrary.dummyFrm.MsgBoxError("Δυστυχώς ήταν αδύνατο να γίνει σύνδεση με την " + comPort + ". Συνδέστε το scanner!");
+                MainLibrary.logger.error("MainLibrary", ex.Message);
                 return;
             }
         }
@@ -211,6 +212,9 @@ namespace Aqua.Library
         private DataSet globalSQLDataSet;
         private SqlDataAdapter globalLicensePlatesSQLAdapter;
         private DataSet globalLicensePlatesSQLDataSet;
+        private SqlDataAdapter globalSQLOffersAdapter;
+        private DataSet globalSQLOffersDataSet;
+
         #endregion        
 
         public DataTable RefreshLicensePlatesSQLConnection(string SQLQuery, string DBTable)
@@ -248,6 +252,26 @@ namespace Aqua.Library
             catch (Exception e)
             {
                 logger.log(0, "RefreshSQLConnection", e.Message);
+            }
+
+            return dataTable;
+        }
+
+        public DataTable RefreshSQLOffersConnection(string SQLQuery, string DBTable)
+        {
+            DataTable dataTable = null;
+            try
+            {
+                this.globalSQLOffersDataSet.Clear();
+                this.globalSQLOffersAdapter.Dispose();
+                this.globalSQLOffersAdapter = null;
+                this.globalSQLOffersAdapter = new SqlDataAdapter(SQLQuery, this.globalSQLConnection);
+                this.globalSQLOffersAdapter.Fill(this.globalSQLOffersDataSet, DBTable);
+                dataTable = this.globalSQLOffersDataSet.Tables[DBTable];
+            }
+            catch (Exception e)
+            {
+                logger.log(0, "RefreshSQLOffersConnection", e.Message);
             }
 
             return dataTable;
@@ -435,6 +459,15 @@ namespace Aqua.Library
             return this.RefreshSQLConnection(SQLQuery, Properties.Resources.CustomersTable);
         }
 
+        public int GetNumberOfVisits(string offerId)
+        {
+            String SQLQuery = "SELECT VISITS FROM ";
+            SQLQuery += Properties.Resources.BarcodeOffersTable;
+            SQLQuery += " WHERE ID = '" + offerId + "'";
+            DataTable dbTable = this.RefreshSQLOffersConnection(SQLQuery, Properties.Resources.BarcodeCustomersHistoryTable);
+            return Convert.ToInt32(dbTable.Rows[0]["VISITS"].ToString());
+        }
+
         public DataTable GetCustomerHistory(string barcodeid)
         {
             String SQLQuery = "SELECT * FROM ";
@@ -521,21 +554,23 @@ namespace Aqua.Library
             return true;
         }
 
-        public bool InsertIntoBarcodeHistory(String barcodeId)
+        public bool InsertIntoBarcodeHistory(string barcodeId, string offerId)
         {
             String InsertSQLQuery = "INSERT INTO " +
                            Properties.Resources.BarcodeCustomersHistoryTable +
-                           "(BARCODEID, VISITDATE) VALUES(" +
-                           "@BARCODEID, @VISITDATE)";
+                           "(BARCODEID, VISITDATE, OFFERID) VALUES(" +
+                           "@BARCODEID, @VISITDATE, @OFFERID)";
 
             SqlCommand mySqlCommand = this.globalSQLConnection.CreateCommand();
             mySqlCommand.CommandText = InsertSQLQuery;
 
             mySqlCommand.Parameters.Add("@BARCODEID", SqlDbType.VarChar);
             mySqlCommand.Parameters.Add("@VISITDATE", SqlDbType.DateTime);
+            mySqlCommand.Parameters.Add("@OFFERID", SqlDbType.VarChar);
 
             mySqlCommand.Parameters["@BARCODEID"].Value = barcodeId;
             mySqlCommand.Parameters["@VISITDATE"].Value = DateTime.Now;
+            mySqlCommand.Parameters["@OFFERID"].Value = offerId;
 
             try
             {
@@ -550,13 +585,22 @@ namespace Aqua.Library
             return true;
         }
 
-        public void DeleteBarcodeCustomer(String barcodeId, String abbreviationId)
+        public void DeleteBarcodeCustomer(string barcodeId, string abbreviationId)
         {
             String DeleteSQLQuery = "DELETE FROM " +
                                     Properties.Resources.BarcodeCustomersTable +
                                     " WHERE BARCODEID = '" + barcodeId + "' AND ABBREVIATION = '" + abbreviationId + "'";
 
             this.RefreshSQLConnection(DeleteSQLQuery, Properties.Resources.BarcodeCustomersTable);
+        }
+
+        public void DeleteBarcodeHistory(string barcodeId)
+        {
+            String DeleteSQLQuery = "DELETE FROM " +
+                                    Properties.Resources.BarcodeCustomersHistoryTable +
+                                    " WHERE BARCODEID = '" + barcodeId + "'";
+
+            this.RefreshSQLConnection(DeleteSQLQuery, Properties.Resources.BarcodeCustomersHistoryTable);
         }
 
         public void InitializeSQLConnections(string IPAddress, string dbName)
@@ -566,6 +610,8 @@ namespace Aqua.Library
             this.globalSQLDataSet = new DataSet();
             this.globalLicensePlatesSQLAdapter = new SqlDataAdapter();
             this.globalLicensePlatesSQLDataSet = new DataSet();
+            this.globalSQLOffersAdapter = new SqlDataAdapter();
+            this.globalSQLOffersDataSet = new DataSet();
             try
             {
                 this.globalSQLConnection.Open();
