@@ -435,6 +435,14 @@ namespace Aqua.Library
             return this.RefreshSQLConnection(SQLQuery, Properties.Resources.CustomersTable);
         }
 
+        public DataTable GetCustomerHistory(string barcodeid)
+        {
+            String SQLQuery = "SELECT * FROM ";
+            SQLQuery += Properties.Resources.BarcodeCustomersHistoryTable;
+            SQLQuery += " WHERE BARCODEID = '" + barcodeid + "'";
+            return this.RefreshSQLConnection(SQLQuery, Properties.Resources.BarcodeCustomersHistoryTable);
+        }
+
         /*
         public int GetNextCustomerID()
         {
@@ -508,6 +516,35 @@ namespace Aqua.Library
             catch (Exception)
             {
                 MainLibrary.dummyFrm.MsgBoxError("Απέτυχε η εισαγωγή νέου πελάτη. Μήπως έχετε εισάγει ξανά με τον ίδιο κωδικό κάρτας;");
+                return false;
+            }
+            return true;
+        }
+
+        public bool InsertIntoBarcodeHistory(String barcodeId)
+        {
+            String InsertSQLQuery = "INSERT INTO " +
+                           Properties.Resources.BarcodeCustomersHistoryTable +
+                           "(BARCODEID, VISITDATE) VALUES(" +
+                           "@BARCODEID, @VISITDATE)";
+
+            SqlCommand mySqlCommand = this.globalSQLConnection.CreateCommand();
+            mySqlCommand.CommandText = InsertSQLQuery;
+
+            mySqlCommand.Parameters.Add("@BARCODEID", SqlDbType.VarChar);
+            mySqlCommand.Parameters.Add("@VISITDATE", SqlDbType.DateTime);
+
+            mySqlCommand.Parameters["@BARCODEID"].Value = barcodeId;
+            mySqlCommand.Parameters["@VISITDATE"].Value = DateTime.Now;
+
+            try
+            {
+                mySqlCommand.ExecuteNonQuery();
+                mySqlCommand.Dispose();
+            }
+            catch (Exception ex)
+            {
+                MainLibrary.dummyFrm.MsgBoxError("Απέτυχε η εισαγωγή νέας πλύσης: " + ex.Message);
                 return false;
             }
             return true;

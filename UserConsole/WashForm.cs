@@ -27,8 +27,7 @@ namespace Aqua.User
             this.labelDateTime.Text = DateTime.Now.ToLongDateString() + " " + DateTime.Now.ToLongTimeString();
             this.pictureBoxClock.Image = library.getClockImage();
             this.pictureBoxBarcode.Image = library.getBarcodeImage();
-            this.pictureBoxCost.Image = library.getCostImage();
-            this.pictureBoxCustomer.Image = library.getCustImage();
+            this.pictureBoxCustomer.Image = library.getCustImage();            
         }
 
         private void FindUserInDatabase()
@@ -91,6 +90,27 @@ namespace Aqua.User
             {
                 FindUserInDatabase();
                 //MainLibrary.dummyFrm.MsgBox("changed to " + this.textBoxBarCode.Text);
+                this.dataGridViewHistory.DataSource = library.GetCustomerHistory(textBoxBarCode.Text.Trim());
+            }
+        }
+
+        private void buttonWash_Click(object sender, EventArgs e)
+        {
+            if (textBoxBarCode.Text.Trim().Equals(""))
+            {
+                MainLibrary.dummyFrm.MsgBoxError("Πρέπει να περάσετε μια κάρτα από το scanner.!");
+                return;
+            }
+
+            DialogResult dr = MainLibrary.dummyFrm.MsgBoxQuestion("Είστε σίγουροι για το πλύσιμο;");
+            if (dr == DialogResult.Yes)
+            {
+                if (this.library.InsertIntoBarcodeHistory(textBoxBarCode.Text.Trim()))                    
+                    MainLibrary.dummyFrm.MsgBoxInformation("Καταχωρήθηκε μια πλύση με επιτυχία!", "Καταχώρηση");
+            }
+            else
+            {
+                return;
             }
         }
     }
