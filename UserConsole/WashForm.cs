@@ -151,5 +151,10 @@ namespace Aqua.User
             }
             this.ClearAllTextBoxes(true);
         }
+      
+        private void timer_Tick(object sender, EventArgs e)
+        {
+            this.labelDateTime.Text = DateTime.Now.ToLongDateString() + " " + DateTime.Now.ToLongTimeString();
+        }
     }
 }

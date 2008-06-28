@@ -57,7 +57,10 @@ namespace Aqua.Library
 
         public bool IsTextBoxReady()
         {
-            return (this.serialPort.BytesToRead == 0);
+            if (this.serialPort.IsOpen)
+                return (this.serialPort.BytesToRead == 0);
+            else
+                return true;
         }
 
         public void SetAppTextBoxCallback(TextBox c, Form f)

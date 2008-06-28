@@ -217,5 +217,10 @@ namespace Aqua.Admin
         {
             MainLibrary.dummyFrm.MsgBox("test");
         }
+
+        private void timer_Tick(object sender, EventArgs e)
+        {
+            this.labelDateTime.Text = DateTime.Now.ToLongDateString() + " " + DateTime.Now.ToLongTimeString();
+        }
     }
 }

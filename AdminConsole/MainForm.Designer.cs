@@ -48,7 +48,6 @@
             this.textBoxWashes = new System.Windows.Forms.TextBox();
             this.label4 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
-            this.label2 = new System.Windows.Forms.Label();
             this.textBoxCustomerName = new System.Windows.Forms.TextBox();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.dataGridViewCustHistory = new System.Windows.Forms.DataGridView();
@@ -60,7 +59,7 @@
             this.groupBox5 = new System.Windows.Forms.GroupBox();
             this.pictureBoxClock = new System.Windows.Forms.PictureBox();
             this.labelDateTime = new System.Windows.Forms.Label();
-            this.serialPort = new System.IO.Ports.SerialPort(this.components);
+            this.timer = new System.Windows.Forms.Timer(this.components);
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxBarcode)).BeginInit();
             this.groupBox2.SuspendLayout();
@@ -80,20 +79,21 @@
             this.groupBox1.Controls.Add(this.textBoxAbbreviation);
             this.groupBox1.Controls.Add(this.labelBarCode);
             this.groupBox1.Controls.Add(this.textBoxBarCode);
-            this.groupBox1.Location = new System.Drawing.Point(9, 102);
-            this.groupBox1.Margin = new System.Windows.Forms.Padding(2);
+            this.groupBox1.Location = new System.Drawing.Point(12, 126);
+            this.groupBox1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Padding = new System.Windows.Forms.Padding(2);
-            this.groupBox1.Size = new System.Drawing.Size(774, 139);
+            this.groupBox1.Padding = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.groupBox1.Size = new System.Drawing.Size(1032, 171);
             this.groupBox1.TabIndex = 0;
             this.groupBox1.TabStop = false;
             this.groupBox1.UseCompatibleTextRendering = true;
             // 
             // pictureBoxBarcode
             // 
-            this.pictureBoxBarcode.Location = new System.Drawing.Point(13, 18);
+            this.pictureBoxBarcode.Location = new System.Drawing.Point(17, 15);
+            this.pictureBoxBarcode.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.pictureBoxBarcode.Name = "pictureBoxBarcode";
-            this.pictureBoxBarcode.Size = new System.Drawing.Size(73, 59);
+            this.pictureBoxBarcode.Size = new System.Drawing.Size(97, 73);
             this.pictureBoxBarcode.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pictureBoxBarcode.TabIndex = 17;
             this.pictureBoxBarcode.TabStop = false;
@@ -102,10 +102,9 @@
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 33.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(161)));
-            this.label1.Location = new System.Drawing.Point(14, 80);
-            this.label1.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label1.Location = new System.Drawing.Point(56, 91);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(352, 52);
+            this.label1.Size = new System.Drawing.Size(446, 65);
             this.label1.TabIndex = 3;
             this.label1.Text = "Συντομογραφία:";
             // 
@@ -113,10 +112,10 @@
             // 
             this.textBoxAbbreviation.Enabled = false;
             this.textBoxAbbreviation.Font = new System.Drawing.Font("Microsoft Sans Serif", 36F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(161)));
-            this.textBoxAbbreviation.Location = new System.Drawing.Point(370, 74);
-            this.textBoxAbbreviation.Margin = new System.Windows.Forms.Padding(2);
+            this.textBoxAbbreviation.Location = new System.Drawing.Point(508, 91);
+            this.textBoxAbbreviation.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.textBoxAbbreviation.Name = "textBoxAbbreviation";
-            this.textBoxAbbreviation.Size = new System.Drawing.Size(391, 62);
+            this.textBoxAbbreviation.Size = new System.Drawing.Size(505, 75);
             this.textBoxAbbreviation.TabIndex = 2;
             this.textBoxAbbreviation.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.textBoxAbbreviation.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBoxAbbreviation_KeyPress);
@@ -125,21 +124,20 @@
             // 
             this.labelBarCode.AutoSize = true;
             this.labelBarCode.Font = new System.Drawing.Font("Microsoft Sans Serif", 33.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(161)));
-            this.labelBarCode.Location = new System.Drawing.Point(162, 22);
-            this.labelBarCode.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.labelBarCode.Location = new System.Drawing.Point(121, 22);
             this.labelBarCode.Name = "labelBarCode";
-            this.labelBarCode.Size = new System.Drawing.Size(204, 52);
+            this.labelBarCode.Size = new System.Drawing.Size(381, 65);
             this.labelBarCode.TabIndex = 1;
-            this.labelBarCode.Text = "Barcode:";
+            this.labelBarCode.Text = "Κωδ. Κάρτας:";
             // 
             // textBoxBarCode
             // 
             this.textBoxBarCode.Enabled = false;
             this.textBoxBarCode.Font = new System.Drawing.Font("Microsoft Sans Serif", 36F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(161)));
-            this.textBoxBarCode.Location = new System.Drawing.Point(563, 8);
-            this.textBoxBarCode.Margin = new System.Windows.Forms.Padding(2);
+            this.textBoxBarCode.Location = new System.Drawing.Point(508, 10);
+            this.textBoxBarCode.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.textBoxBarCode.Name = "textBoxBarCode";
-            this.textBoxBarCode.Size = new System.Drawing.Size(198, 62);
+            this.textBoxBarCode.Size = new System.Drawing.Size(506, 75);
             this.textBoxBarCode.TabIndex = 0;
             this.textBoxBarCode.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
@@ -157,13 +155,12 @@
             this.groupBox2.Controls.Add(this.textBoxWashes);
             this.groupBox2.Controls.Add(this.label4);
             this.groupBox2.Controls.Add(this.label3);
-            this.groupBox2.Controls.Add(this.label2);
             this.groupBox2.Controls.Add(this.textBoxCustomerName);
-            this.groupBox2.Location = new System.Drawing.Point(9, 245);
-            this.groupBox2.Margin = new System.Windows.Forms.Padding(2);
+            this.groupBox2.Location = new System.Drawing.Point(12, 302);
+            this.groupBox2.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Padding = new System.Windows.Forms.Padding(2);
-            this.groupBox2.Size = new System.Drawing.Size(773, 360);
+            this.groupBox2.Padding = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.groupBox2.Size = new System.Drawing.Size(1031, 443);
             this.groupBox2.TabIndex = 1;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Στοιχεία Πελάτη";
@@ -172,31 +169,29 @@
             // 
             this.label7.AutoSize = true;
             this.label7.Font = new System.Drawing.Font("Microsoft Sans Serif", 25.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(161)));
-            this.label7.Location = new System.Drawing.Point(73, 191);
-            this.label7.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label7.Location = new System.Drawing.Point(13, 228);
             this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(293, 39);
+            this.label7.Size = new System.Drawing.Size(362, 51);
             this.label7.TabIndex = 24;
             this.label7.Text = "Ημ/νία εγγραφής:";
             // 
             // textBoxDateRegistered
             // 
             this.textBoxDateRegistered.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(161)));
-            this.textBoxDateRegistered.Location = new System.Drawing.Point(370, 197);
-            this.textBoxDateRegistered.Margin = new System.Windows.Forms.Padding(2);
+            this.textBoxDateRegistered.Location = new System.Drawing.Point(493, 242);
+            this.textBoxDateRegistered.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.textBoxDateRegistered.Name = "textBoxDateRegistered";
             this.textBoxDateRegistered.ReadOnly = true;
-            this.textBoxDateRegistered.Size = new System.Drawing.Size(391, 31);
+            this.textBoxDateRegistered.Size = new System.Drawing.Size(520, 37);
             this.textBoxDateRegistered.TabIndex = 23;
             // 
             // label6
             // 
             this.label6.AutoSize = true;
             this.label6.Font = new System.Drawing.Font("Microsoft Sans Serif", 25.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(161)));
-            this.label6.Location = new System.Drawing.Point(221, 298);
-            this.label6.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label6.Location = new System.Drawing.Point(13, 363);
             this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(145, 39);
+            this.label6.Size = new System.Drawing.Size(181, 51);
             this.label6.TabIndex = 22;
             this.label6.Text = "Κόστος:";
             // 
@@ -204,11 +199,11 @@
             // 
             this.textBoxCost.Enabled = false;
             this.textBoxCost.Font = new System.Drawing.Font("Microsoft Sans Serif", 25.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(161)));
-            this.textBoxCost.Location = new System.Drawing.Point(595, 298);
-            this.textBoxCost.Margin = new System.Windows.Forms.Padding(2);
+            this.textBoxCost.Location = new System.Drawing.Point(793, 367);
+            this.textBoxCost.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.textBoxCost.Name = "textBoxCost";
             this.textBoxCost.ReadOnly = true;
-            this.textBoxCost.Size = new System.Drawing.Size(166, 46);
+            this.textBoxCost.Size = new System.Drawing.Size(220, 56);
             this.textBoxCost.TabIndex = 21;
             this.textBoxCost.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
@@ -216,40 +211,43 @@
             // 
             this.comboBoxLicensePlates.Font = new System.Drawing.Font("Microsoft Sans Serif", 25.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(161)));
             this.comboBoxLicensePlates.FormattingEnabled = true;
-            this.comboBoxLicensePlates.Location = new System.Drawing.Point(370, 75);
-            this.comboBoxLicensePlates.Margin = new System.Windows.Forms.Padding(2);
+            this.comboBoxLicensePlates.Location = new System.Drawing.Point(493, 97);
+            this.comboBoxLicensePlates.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.comboBoxLicensePlates.Name = "comboBoxLicensePlates";
-            this.comboBoxLicensePlates.Size = new System.Drawing.Size(391, 47);
+            this.comboBoxLicensePlates.Size = new System.Drawing.Size(520, 59);
             this.comboBoxLicensePlates.Sorted = true;
             this.comboBoxLicensePlates.TabIndex = 20;
             this.comboBoxLicensePlates.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.comboBoxLicensePlates_KeyPress);
             // 
             // pictureBoxCost
             // 
-            this.pictureBoxCost.Location = new System.Drawing.Point(517, 295);
+            this.pictureBoxCost.Location = new System.Drawing.Point(689, 360);
+            this.pictureBoxCost.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.pictureBoxCost.Name = "pictureBoxCost";
-            this.pictureBoxCost.Size = new System.Drawing.Size(73, 55);
+            this.pictureBoxCost.Size = new System.Drawing.Size(97, 68);
             this.pictureBoxCost.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pictureBoxCost.TabIndex = 19;
             this.pictureBoxCost.TabStop = false;
             // 
             // pictureBoxCustomer
             // 
-            this.pictureBoxCustomer.Location = new System.Drawing.Point(13, 20);
+            this.pictureBoxCustomer.Location = new System.Drawing.Point(17, 25);
+            this.pictureBoxCustomer.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.pictureBoxCustomer.Name = "pictureBoxCustomer";
-            this.pictureBoxCustomer.Size = new System.Drawing.Size(73, 59);
+            this.pictureBoxCustomer.Size = new System.Drawing.Size(97, 73);
             this.pictureBoxCustomer.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pictureBoxCustomer.TabIndex = 18;
             this.pictureBoxCustomer.TabStop = false;
             // 
             // comboBoxOffers
             // 
+            this.comboBoxOffers.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
             this.comboBoxOffers.Font = new System.Drawing.Font("Microsoft Sans Serif", 25.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(161)));
             this.comboBoxOffers.FormattingEnabled = true;
-            this.comboBoxOffers.Location = new System.Drawing.Point(370, 135);
-            this.comboBoxOffers.Margin = new System.Windows.Forms.Padding(2);
+            this.comboBoxOffers.Location = new System.Drawing.Point(493, 166);
+            this.comboBoxOffers.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.comboBoxOffers.Name = "comboBoxOffers";
-            this.comboBoxOffers.Size = new System.Drawing.Size(391, 47);
+            this.comboBoxOffers.Size = new System.Drawing.Size(520, 59);
             this.comboBoxOffers.TabIndex = 10;
             this.comboBoxOffers.SelectedIndexChanged += new System.EventHandler(this.comboBoxOffers_SelectedIndexChanged);
             // 
@@ -257,22 +255,21 @@
             // 
             this.label5.AutoSize = true;
             this.label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 25.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(161)));
-            this.label5.Location = new System.Drawing.Point(135, 241);
-            this.label5.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label5.Location = new System.Drawing.Point(13, 297);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(231, 39);
+            this.label5.Size = new System.Drawing.Size(496, 51);
             this.label5.TabIndex = 9;
-            this.label5.Text = "Αρ. Πλύσεων:";
+            this.label5.Text = "Πλύσεις που απομένουν:";
             // 
             // textBoxWashes
             // 
             this.textBoxWashes.Enabled = false;
             this.textBoxWashes.Font = new System.Drawing.Font("Microsoft Sans Serif", 25.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(161)));
-            this.textBoxWashes.Location = new System.Drawing.Point(595, 241);
-            this.textBoxWashes.Margin = new System.Windows.Forms.Padding(2);
+            this.textBoxWashes.Location = new System.Drawing.Point(793, 297);
+            this.textBoxWashes.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.textBoxWashes.Name = "textBoxWashes";
             this.textBoxWashes.ReadOnly = true;
-            this.textBoxWashes.Size = new System.Drawing.Size(166, 46);
+            this.textBoxWashes.Size = new System.Drawing.Size(220, 56);
             this.textBoxWashes.TabIndex = 8;
             this.textBoxWashes.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
@@ -280,10 +277,9 @@
             // 
             this.label4.AutoSize = true;
             this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 25.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(161)));
-            this.label4.Location = new System.Drawing.Point(76, 132);
-            this.label4.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label4.Location = new System.Drawing.Point(13, 166);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(290, 39);
+            this.label4.Size = new System.Drawing.Size(360, 51);
             this.label4.TabIndex = 7;
             this.label4.Text = "Πακέτο πλύσεων:";
             // 
@@ -291,42 +287,31 @@
             // 
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 25.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(161)));
-            this.label3.Location = new System.Drawing.Point(10, 75);
-            this.label3.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label3.Location = new System.Drawing.Point(13, 104);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(356, 39);
+            this.label3.Size = new System.Drawing.Size(209, 51);
             this.label3.TabIndex = 5;
-            this.label3.Text = "Αρ. Κυκλοφορίας Ι.Χ.:";
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 25.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(161)));
-            this.label2.Location = new System.Drawing.Point(202, 18);
-            this.label2.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(164, 39);
-            this.label2.TabIndex = 3;
-            this.label2.Text = "Πελάτης:";
+            this.label3.Text = "Οχήματα:";
             // 
             // textBoxCustomerName
             // 
+            this.textBoxCustomerName.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(192)))), ((int)(((byte)(128)))));
             this.textBoxCustomerName.Font = new System.Drawing.Font("Microsoft Sans Serif", 25.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(161)));
-            this.textBoxCustomerName.Location = new System.Drawing.Point(370, 15);
-            this.textBoxCustomerName.Margin = new System.Windows.Forms.Padding(2);
+            this.textBoxCustomerName.Location = new System.Drawing.Point(131, 34);
+            this.textBoxCustomerName.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.textBoxCustomerName.Name = "textBoxCustomerName";
             this.textBoxCustomerName.ReadOnly = true;
-            this.textBoxCustomerName.Size = new System.Drawing.Size(391, 46);
+            this.textBoxCustomerName.Size = new System.Drawing.Size(881, 56);
             this.textBoxCustomerName.TabIndex = 2;
             // 
             // groupBox3
             // 
             this.groupBox3.Controls.Add(this.dataGridViewCustHistory);
-            this.groupBox3.Location = new System.Drawing.Point(8, 684);
-            this.groupBox3.Margin = new System.Windows.Forms.Padding(2);
+            this.groupBox3.Location = new System.Drawing.Point(11, 842);
+            this.groupBox3.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Padding = new System.Windows.Forms.Padding(2);
-            this.groupBox3.Size = new System.Drawing.Size(773, 193);
+            this.groupBox3.Padding = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.groupBox3.Size = new System.Drawing.Size(1031, 238);
             this.groupBox3.TabIndex = 2;
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "Επισκέψεις Πελάτη";
@@ -336,21 +321,21 @@
             this.dataGridViewCustHistory.AllowUserToAddRows = false;
             this.dataGridViewCustHistory.AllowUserToDeleteRows = false;
             this.dataGridViewCustHistory.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridViewCustHistory.Location = new System.Drawing.Point(13, 21);
-            this.dataGridViewCustHistory.Margin = new System.Windows.Forms.Padding(2);
+            this.dataGridViewCustHistory.Location = new System.Drawing.Point(17, 26);
+            this.dataGridViewCustHistory.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.dataGridViewCustHistory.Name = "dataGridViewCustHistory";
             this.dataGridViewCustHistory.ReadOnly = true;
             this.dataGridViewCustHistory.RowTemplate.Height = 24;
-            this.dataGridViewCustHistory.Size = new System.Drawing.Size(748, 162);
+            this.dataGridViewCustHistory.Size = new System.Drawing.Size(997, 199);
             this.dataGridViewCustHistory.TabIndex = 0;
             // 
             // buttonNewCust
             // 
             this.buttonNewCust.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(161)));
-            this.buttonNewCust.Location = new System.Drawing.Point(11, 17);
-            this.buttonNewCust.Margin = new System.Windows.Forms.Padding(2);
+            this.buttonNewCust.Location = new System.Drawing.Point(15, 21);
+            this.buttonNewCust.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.buttonNewCust.Name = "buttonNewCust";
-            this.buttonNewCust.Size = new System.Drawing.Size(126, 44);
+            this.buttonNewCust.Size = new System.Drawing.Size(168, 54);
             this.buttonNewCust.TabIndex = 11;
             this.buttonNewCust.Text = "ΝΕΟΣ ΠΕΛΑΤΗΣ";
             this.buttonNewCust.UseVisualStyleBackColor = true;
@@ -362,11 +347,11 @@
             this.groupBox4.Controls.Add(this.buttonExit);
             this.groupBox4.Controls.Add(this.buttonDeleteCust);
             this.groupBox4.Controls.Add(this.buttonNewCust);
-            this.groupBox4.Location = new System.Drawing.Point(9, 609);
-            this.groupBox4.Margin = new System.Windows.Forms.Padding(2);
+            this.groupBox4.Location = new System.Drawing.Point(12, 750);
+            this.groupBox4.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.groupBox4.Name = "groupBox4";
-            this.groupBox4.Padding = new System.Windows.Forms.Padding(2);
-            this.groupBox4.Size = new System.Drawing.Size(770, 71);
+            this.groupBox4.Padding = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.groupBox4.Size = new System.Drawing.Size(1027, 87);
             this.groupBox4.TabIndex = 3;
             this.groupBox4.TabStop = false;
             this.groupBox4.Text = "Λειτουργίες";
@@ -375,10 +360,10 @@
             // 
             this.buttonSaveCust.Enabled = false;
             this.buttonSaveCust.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(161)));
-            this.buttonSaveCust.Location = new System.Drawing.Point(158, 17);
-            this.buttonSaveCust.Margin = new System.Windows.Forms.Padding(2);
+            this.buttonSaveCust.Location = new System.Drawing.Point(211, 21);
+            this.buttonSaveCust.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.buttonSaveCust.Name = "buttonSaveCust";
-            this.buttonSaveCust.Size = new System.Drawing.Size(126, 44);
+            this.buttonSaveCust.Size = new System.Drawing.Size(168, 54);
             this.buttonSaveCust.TabIndex = 14;
             this.buttonSaveCust.Text = "ΑΠΟΘΗΚΕΥΣΗ";
             this.buttonSaveCust.UseVisualStyleBackColor = true;
@@ -387,10 +372,10 @@
             // buttonExit
             // 
             this.buttonExit.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(161)));
-            this.buttonExit.Location = new System.Drawing.Point(633, 17);
-            this.buttonExit.Margin = new System.Windows.Forms.Padding(2);
+            this.buttonExit.Location = new System.Drawing.Point(844, 21);
+            this.buttonExit.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.buttonExit.Name = "buttonExit";
-            this.buttonExit.Size = new System.Drawing.Size(126, 44);
+            this.buttonExit.Size = new System.Drawing.Size(168, 54);
             this.buttonExit.TabIndex = 13;
             this.buttonExit.Text = "ΕΞΟΔΟΣ";
             this.buttonExit.UseVisualStyleBackColor = true;
@@ -399,10 +384,10 @@
             // buttonDeleteCust
             // 
             this.buttonDeleteCust.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(161)));
-            this.buttonDeleteCust.Location = new System.Drawing.Point(308, 17);
-            this.buttonDeleteCust.Margin = new System.Windows.Forms.Padding(2);
+            this.buttonDeleteCust.Location = new System.Drawing.Point(411, 21);
+            this.buttonDeleteCust.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.buttonDeleteCust.Name = "buttonDeleteCust";
-            this.buttonDeleteCust.Size = new System.Drawing.Size(126, 44);
+            this.buttonDeleteCust.Size = new System.Drawing.Size(168, 54);
             this.buttonDeleteCust.TabIndex = 12;
             this.buttonDeleteCust.Text = "ΔΙΑΓΡΑΦΗ ΠΕΛΑΤΗ";
             this.buttonDeleteCust.UseVisualStyleBackColor = true;
@@ -412,18 +397,21 @@
             // 
             this.groupBox5.Controls.Add(this.pictureBoxClock);
             this.groupBox5.Controls.Add(this.labelDateTime);
-            this.groupBox5.Location = new System.Drawing.Point(9, 11);
+            this.groupBox5.Location = new System.Drawing.Point(12, 14);
+            this.groupBox5.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.groupBox5.Name = "groupBox5";
-            this.groupBox5.Size = new System.Drawing.Size(772, 94);
+            this.groupBox5.Padding = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.groupBox5.Size = new System.Drawing.Size(1029, 116);
             this.groupBox5.TabIndex = 4;
             this.groupBox5.TabStop = false;
             this.groupBox5.Text = "Ημερομηνία";
             // 
             // pictureBoxClock
             // 
-            this.pictureBoxClock.Location = new System.Drawing.Point(13, 20);
+            this.pictureBoxClock.Location = new System.Drawing.Point(17, 25);
+            this.pictureBoxClock.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.pictureBoxClock.Name = "pictureBoxClock";
-            this.pictureBoxClock.Size = new System.Drawing.Size(73, 66);
+            this.pictureBoxClock.Size = new System.Drawing.Size(97, 81);
             this.pictureBoxClock.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pictureBoxClock.TabIndex = 16;
             this.pictureBoxClock.TabStop = false;
@@ -432,22 +420,27 @@
             // 
             this.labelDateTime.AutoSize = true;
             this.labelDateTime.Font = new System.Drawing.Font("Microsoft Sans Serif", 25.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(161)));
-            this.labelDateTime.Location = new System.Drawing.Point(107, 32);
-            this.labelDateTime.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.labelDateTime.Location = new System.Drawing.Point(143, 39);
             this.labelDateTime.Name = "labelDateTime";
-            this.labelDateTime.Size = new System.Drawing.Size(0, 39);
+            this.labelDateTime.Size = new System.Drawing.Size(0, 51);
             this.labelDateTime.TabIndex = 15;
+            // 
+            // timer
+            // 
+            this.timer.Enabled = true;
+            this.timer.Tick += new System.EventHandler(this.timer_Tick);
             // 
             // MainForm
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(792, 884);
+            this.ClientSize = new System.Drawing.Size(1056, 1088);
             this.Controls.Add(this.groupBox5);
             this.Controls.Add(this.groupBox4);
             this.Controls.Add(this.groupBox3);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.groupBox1);
+            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.Name = "MainForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "AquaLine - Προπληρωμένες Κάρτες Πλύσεων";
@@ -477,7 +470,6 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.TextBox textBoxAbbreviation;
         private System.Windows.Forms.GroupBox groupBox2;
-        private System.Windows.Forms.Label label2;
         private System.Windows.Forms.TextBox textBoxCustomerName;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label3;
@@ -502,7 +494,7 @@
         private System.Windows.Forms.TextBox textBoxCost;
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.TextBox textBoxDateRegistered;
-        private System.IO.Ports.SerialPort serialPort;
+        private System.Windows.Forms.Timer timer;
 
     }
 }
