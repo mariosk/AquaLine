@@ -27,6 +27,7 @@ namespace Aqua.User
 
         private void WashForm_Load(object sender, EventArgs e)
         {
+            this.comboBoxLicensePlates.DropDownStyle = ComboBoxStyle.DropDownList;            
             this.labelDateTime.Text = DateTime.Now.ToLongDateString() + " " + DateTime.Now.ToLongTimeString();
             this.pictureBoxClock.Image = library.getClockImage();
             this.pictureBoxBarcode.Image = library.getBarcodeImage();

@@ -24,6 +24,8 @@ namespace Aqua.Admin
 
         private void MainForm_Load(object sender, EventArgs e)
         {
+            this.comboBoxLicensePlates.DropDownStyle = ComboBoxStyle.DropDownList;
+            this.comboBoxOffers.DropDownStyle = ComboBoxStyle.DropDownList;
             /*
             DataTable dbTable = this.library.GetCustomersFromDB();
             if (dbTable.Rows.Count > 0)
@@ -229,7 +231,7 @@ namespace Aqua.Admin
 
         private void comboBoxLicensePlates_KeyPress(object sender, KeyPressEventArgs e)
         {
-            MainLibrary.dummyFrm.MsgBox("test");
+            //MainLibrary.dummyFrm.MsgBox("test");
         }
 
         private void timer_Tick(object sender, EventArgs e)
