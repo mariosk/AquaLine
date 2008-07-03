@@ -14,13 +14,15 @@ namespace Aqua.User
         private MainLibrary library;
         private List<OffersObject> offers;
         private int selectedOffer;
+        private bool readOnly;
 
-        public WashForm(MainLibrary library)
+        public WashForm(MainLibrary library, bool readOnly)
         {
             InitializeComponent();
             this.library = library;
             this.library.SetAppTextBoxCallBack(this.textBoxBarCode, this);
             this.offers = this.library.GetAllOffers();
+            this.readOnly = readOnly;
         }
 
         private void WashForm_Load(object sender, EventArgs e)
@@ -28,7 +30,8 @@ namespace Aqua.User
             this.labelDateTime.Text = DateTime.Now.ToLongDateString() + " " + DateTime.Now.ToLongTimeString();
             this.pictureBoxClock.Image = library.getClockImage();
             this.pictureBoxBarcode.Image = library.getBarcodeImage();
-            this.pictureBoxCustomer.Image = library.getCustImage();            
+            this.pictureBoxCustomer.Image = library.getCustImage();
+            this.buttonWash.Visible = !this.readOnly;
         }
 
         private bool FindUserInDatabase()
@@ -114,6 +117,10 @@ namespace Aqua.User
                     {
                         DataTable dbTable = library.GetCustomerHistory(textBoxBarCode.Text.Trim());
                         this.dataGridViewHistory.DataSource = dbTable;
+                        dataGridViewHistory.Columns[dbTable.Columns.IndexOf("BARCODEID")].Visible = false;
+                        dataGridViewHistory.Columns[dbTable.Columns.IndexOf("OFFERID")].Visible = false;
+                        dataGridViewHistory.Columns[dbTable.Columns.IndexOf("VISITDATE")].HeaderText = "Ημερομηνία";
+                        dataGridViewHistory.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells;
                         int offerVisits = this.library.GetNumberOfVisits(this.offers[this.selectedOffer].Id);
                         int visitsLeft = offerVisits - dbTable.Rows.Count;                        
                         this.textBoxWashesLeft.Text = visitsLeft.ToString();

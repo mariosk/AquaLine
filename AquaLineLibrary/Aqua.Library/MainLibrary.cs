@@ -281,6 +281,11 @@ namespace Aqua.Library
         }
 
         #region Accessors of Images in public resources...
+        public Bitmap getAquaImage()
+        {
+            return Properties.Resources.aquaImage;
+        }
+        
         public Bitmap getSaveImage()
         {
             return Properties.Resources.SaveImg;

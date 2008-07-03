@@ -17,10 +17,12 @@ namespace Aqua.User
             String ipAddress = ConfigurationSettings.AppSettings["mssqlIpAddress"].ToString();
             String dbName = ConfigurationSettings.AppSettings["mssqlDbName"].ToString();
             String comPort = ConfigurationSettings.AppSettings["comPort"].ToString();
+            String value = ConfigurationSettings.AppSettings["readOnly"].ToString();
+            bool readOnly = Convert.ToBoolean(ConfigurationSettings.AppSettings["readOnly"].ToString());
 
             MainLibrary library = new MainLibrary("AquaAdmin.log", ipAddress, dbName, comPort);
             Application.EnableVisualStyles();
-            Application.Run(new WashForm(library));
+            Application.Run(new WashForm(library, readOnly));
         }
     }
 }

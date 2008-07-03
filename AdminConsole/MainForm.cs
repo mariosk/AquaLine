@@ -120,6 +120,20 @@ namespace Aqua.Admin
                 this.textBoxDateRegistered.Text += ", ";
                 this.textBoxDateRegistered.Text += barcodeCust.DateRegistered.ToLongTimeString();
                 this.textBoxBarCode.Text = barcodeCust.BarcodeId;
+
+                DataTable dbTable = library.GetCustomerHistory(textBoxBarCode.Text.Trim());
+                this.dataGridViewHistory.DataSource = dbTable;
+                dataGridViewHistory.Columns[dbTable.Columns.IndexOf("BARCODEID")].Visible = false;
+                dataGridViewHistory.Columns[dbTable.Columns.IndexOf("OFFERID")].Visible = false;
+                dataGridViewHistory.Columns[dbTable.Columns.IndexOf("VISITDATE")].HeaderText = "Ημερομηνία";
+                dataGridViewHistory.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells;
+                int offerVisits = this.library.GetNumberOfVisits(this.offers[this.comboBoxOffers.SelectedIndex].Id);
+                int visitsLeft = offerVisits - dbTable.Rows.Count;
+                this.textBoxWashesLeft.Text = visitsLeft.ToString();
+                if (visitsLeft <= 0)
+                {                   
+                    MainLibrary.dummyFrm.MsgBoxError("Δυστυχώς δεν έχετε άλλες πλύσεις. Πρέπει να ανανεώσετε τη κάρτα σας!");
+                }
             }
             this.textBoxCustomerName.Text = customerO.Name;
             for (int i = 0; i < customerO.LicensePlates.Length; i++)
@@ -143,12 +157,12 @@ namespace Aqua.Admin
             if (this.comboBoxOffers.SelectedIndex >= 0 && this.comboBoxOffers.SelectedIndex < this.offers.Count) 
             {
                 this.textBoxCost.Text = this.offers[this.comboBoxOffers.SelectedIndex].Cost.ToString() + " EUR";
-                this.textBoxWashes.Text = this.offers[this.comboBoxOffers.SelectedIndex].Visits.ToString();
+                this.textBoxWashesLeft.Text = this.offers[this.comboBoxOffers.SelectedIndex].Visits.ToString();
             }
             else 
             {
                 this.textBoxCost.Text = "";
-                this.textBoxWashes.Text = "";
+                this.textBoxWashesLeft.Text = "";
             }
         }
 
@@ -221,6 +235,11 @@ namespace Aqua.Admin
         private void timer_Tick(object sender, EventArgs e)
         {
             this.labelDateTime.Text = DateTime.Now.ToLongDateString() + " " + DateTime.Now.ToLongTimeString();
+        }
+
+        private void buttonUpdate_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

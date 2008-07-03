@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(WashForm));
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.pictureBoxBarcode = new System.Windows.Forms.PictureBox();
             this.label2 = new System.Windows.Forms.Label();
@@ -110,6 +111,7 @@
             // 
             this.groupBox5.Controls.Add(this.pictureBoxClock);
             this.groupBox5.Controls.Add(this.labelDateTime);
+            this.groupBox5.Font = new System.Drawing.Font("Microsoft Sans Serif", 16.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(161)));
             this.groupBox5.Location = new System.Drawing.Point(16, 15);
             this.groupBox5.Margin = new System.Windows.Forms.Padding(4);
             this.groupBox5.Name = "groupBox5";
@@ -121,10 +123,10 @@
             // 
             // pictureBoxClock
             // 
-            this.pictureBoxClock.Location = new System.Drawing.Point(17, 25);
+            this.pictureBoxClock.Location = new System.Drawing.Point(17, 41);
             this.pictureBoxClock.Margin = new System.Windows.Forms.Padding(4);
             this.pictureBoxClock.Name = "pictureBoxClock";
-            this.pictureBoxClock.Size = new System.Drawing.Size(97, 81);
+            this.pictureBoxClock.Size = new System.Drawing.Size(97, 65);
             this.pictureBoxClock.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pictureBoxClock.TabIndex = 16;
             this.pictureBoxClock.TabStop = false;
@@ -150,11 +152,12 @@
             this.groupBox2.Controls.Add(this.label4);
             this.groupBox2.Controls.Add(this.label3);
             this.groupBox2.Controls.Add(this.textBoxCustomerName);
+            this.groupBox2.Font = new System.Drawing.Font("Microsoft Sans Serif", 16.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(161)));
             this.groupBox2.Location = new System.Drawing.Point(16, 268);
             this.groupBox2.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.groupBox2.Name = "groupBox2";
             this.groupBox2.Padding = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.groupBox2.Size = new System.Drawing.Size(1031, 350);
+            this.groupBox2.Size = new System.Drawing.Size(1031, 359);
             this.groupBox2.TabIndex = 6;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Στοιχεία Πελάτη";
@@ -163,7 +166,7 @@
             // 
             this.textBoxOffer.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
             this.textBoxOffer.Font = new System.Drawing.Font("Microsoft Sans Serif", 25.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(161)));
-            this.textBoxOffer.Location = new System.Drawing.Point(493, 162);
+            this.textBoxOffer.Location = new System.Drawing.Point(493, 173);
             this.textBoxOffer.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.textBoxOffer.Name = "textBoxOffer";
             this.textBoxOffer.ReadOnly = true;
@@ -174,7 +177,7 @@
             // 
             this.label7.AutoSize = true;
             this.label7.Font = new System.Drawing.Font("Microsoft Sans Serif", 25.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(161)));
-            this.label7.Location = new System.Drawing.Point(8, 224);
+            this.label7.Location = new System.Drawing.Point(8, 235);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(362, 51);
             this.label7.TabIndex = 24;
@@ -183,7 +186,7 @@
             // textBoxDateRegistered
             // 
             this.textBoxDateRegistered.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(161)));
-            this.textBoxDateRegistered.Location = new System.Drawing.Point(493, 233);
+            this.textBoxDateRegistered.Location = new System.Drawing.Point(493, 244);
             this.textBoxDateRegistered.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.textBoxDateRegistered.Name = "textBoxDateRegistered";
             this.textBoxDateRegistered.ReadOnly = true;
@@ -194,7 +197,7 @@
             // 
             this.comboBoxLicensePlates.Font = new System.Drawing.Font("Microsoft Sans Serif", 25.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(161)));
             this.comboBoxLicensePlates.FormattingEnabled = true;
-            this.comboBoxLicensePlates.Location = new System.Drawing.Point(493, 92);
+            this.comboBoxLicensePlates.Location = new System.Drawing.Point(493, 103);
             this.comboBoxLicensePlates.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.comboBoxLicensePlates.Name = "comboBoxLicensePlates";
             this.comboBoxLicensePlates.Size = new System.Drawing.Size(520, 59);
@@ -203,7 +206,7 @@
             // 
             // pictureBoxCustomer
             // 
-            this.pictureBoxCustomer.Location = new System.Drawing.Point(17, 25);
+            this.pictureBoxCustomer.Location = new System.Drawing.Point(17, 36);
             this.pictureBoxCustomer.Margin = new System.Windows.Forms.Padding(4);
             this.pictureBoxCustomer.Name = "pictureBoxCustomer";
             this.pictureBoxCustomer.Size = new System.Drawing.Size(97, 73);
@@ -215,7 +218,7 @@
             // 
             this.label5.AutoSize = true;
             this.label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 25.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(161)));
-            this.label5.Location = new System.Drawing.Point(7, 283);
+            this.label5.Location = new System.Drawing.Point(7, 294);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(496, 51);
             this.label5.TabIndex = 9;
@@ -225,7 +228,7 @@
             // 
             this.textBoxWashesLeft.Enabled = false;
             this.textBoxWashesLeft.Font = new System.Drawing.Font("Microsoft Sans Serif", 25.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(161)));
-            this.textBoxWashesLeft.Location = new System.Drawing.Point(793, 283);
+            this.textBoxWashesLeft.Location = new System.Drawing.Point(793, 294);
             this.textBoxWashesLeft.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.textBoxWashesLeft.Name = "textBoxWashesLeft";
             this.textBoxWashesLeft.ReadOnly = true;
@@ -247,7 +250,7 @@
             // 
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 25.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(161)));
-            this.label3.Location = new System.Drawing.Point(8, 111);
+            this.label3.Location = new System.Drawing.Point(8, 107);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(209, 51);
             this.label3.TabIndex = 5;
@@ -257,7 +260,7 @@
             // 
             this.textBoxCustomerName.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(192)))), ((int)(((byte)(128)))));
             this.textBoxCustomerName.Font = new System.Drawing.Font("Microsoft Sans Serif", 25.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(161)));
-            this.textBoxCustomerName.Location = new System.Drawing.Point(139, 25);
+            this.textBoxCustomerName.Location = new System.Drawing.Point(139, 36);
             this.textBoxCustomerName.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.textBoxCustomerName.Name = "textBoxCustomerName";
             this.textBoxCustomerName.ReadOnly = true;
@@ -267,7 +270,7 @@
             // buttonWash
             // 
             this.buttonWash.Font = new System.Drawing.Font("Microsoft Sans Serif", 16.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(161)));
-            this.buttonWash.Location = new System.Drawing.Point(381, 628);
+            this.buttonWash.Location = new System.Drawing.Point(381, 639);
             this.buttonWash.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.buttonWash.Name = "buttonWash";
             this.buttonWash.Size = new System.Drawing.Size(301, 57);
@@ -279,11 +282,12 @@
             // groupBox3
             // 
             this.groupBox3.Controls.Add(this.dataGridViewHistory);
-            this.groupBox3.Location = new System.Drawing.Point(16, 686);
+            this.groupBox3.Font = new System.Drawing.Font("Microsoft Sans Serif", 16.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(161)));
+            this.groupBox3.Location = new System.Drawing.Point(15, 698);
             this.groupBox3.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.groupBox3.Name = "groupBox3";
             this.groupBox3.Padding = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.groupBox3.Size = new System.Drawing.Size(1028, 235);
+            this.groupBox3.Size = new System.Drawing.Size(1028, 250);
             this.groupBox3.TabIndex = 8;
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "Πλύσεις";
@@ -291,12 +295,13 @@
             // dataGridViewHistory
             // 
             this.dataGridViewHistory.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridViewHistory.Location = new System.Drawing.Point(8, 21);
+            this.dataGridViewHistory.Location = new System.Drawing.Point(8, 39);
             this.dataGridViewHistory.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.dataGridViewHistory.Name = "dataGridViewHistory";
             this.dataGridViewHistory.ReadOnly = true;
+            this.dataGridViewHistory.RowHeadersWidth = 50;
             this.dataGridViewHistory.RowTemplate.Height = 24;
-            this.dataGridViewHistory.Size = new System.Drawing.Size(1013, 203);
+            this.dataGridViewHistory.Size = new System.Drawing.Size(1013, 201);
             this.dataGridViewHistory.TabIndex = 0;
             // 
             // timer
@@ -308,12 +313,13 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1060, 928);
+            this.ClientSize = new System.Drawing.Size(1060, 950);
             this.Controls.Add(this.groupBox3);
             this.Controls.Add(this.buttonWash);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.groupBox5);
             this.Controls.Add(this.groupBox1);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "WashForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;

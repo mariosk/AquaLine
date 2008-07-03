@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.pictureBoxBarcode = new System.Windows.Forms.PictureBox();
             this.label1 = new System.Windows.Forms.Label();
@@ -45,12 +46,12 @@
             this.pictureBoxCustomer = new System.Windows.Forms.PictureBox();
             this.comboBoxOffers = new System.Windows.Forms.ComboBox();
             this.label5 = new System.Windows.Forms.Label();
-            this.textBoxWashes = new System.Windows.Forms.TextBox();
+            this.textBoxWashesLeft = new System.Windows.Forms.TextBox();
             this.label4 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.textBoxCustomerName = new System.Windows.Forms.TextBox();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
-            this.dataGridViewCustHistory = new System.Windows.Forms.DataGridView();
+            this.dataGridViewHistory = new System.Windows.Forms.DataGridView();
             this.buttonNewCust = new System.Windows.Forms.Button();
             this.groupBox4 = new System.Windows.Forms.GroupBox();
             this.buttonSaveCust = new System.Windows.Forms.Button();
@@ -60,13 +61,14 @@
             this.pictureBoxClock = new System.Windows.Forms.PictureBox();
             this.labelDateTime = new System.Windows.Forms.Label();
             this.timer = new System.Windows.Forms.Timer(this.components);
+            this.buttonUpdate = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxBarcode)).BeginInit();
             this.groupBox2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxCost)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxCustomer)).BeginInit();
             this.groupBox3.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewCustHistory)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewHistory)).BeginInit();
             this.groupBox4.SuspendLayout();
             this.groupBox5.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxClock)).BeginInit();
@@ -91,7 +93,7 @@
             // pictureBoxBarcode
             // 
             this.pictureBoxBarcode.Location = new System.Drawing.Point(17, 15);
-            this.pictureBoxBarcode.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.pictureBoxBarcode.Margin = new System.Windows.Forms.Padding(4);
             this.pictureBoxBarcode.Name = "pictureBoxBarcode";
             this.pictureBoxBarcode.Size = new System.Drawing.Size(97, 73);
             this.pictureBoxBarcode.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -152,10 +154,11 @@
             this.groupBox2.Controls.Add(this.pictureBoxCustomer);
             this.groupBox2.Controls.Add(this.comboBoxOffers);
             this.groupBox2.Controls.Add(this.label5);
-            this.groupBox2.Controls.Add(this.textBoxWashes);
+            this.groupBox2.Controls.Add(this.textBoxWashesLeft);
             this.groupBox2.Controls.Add(this.label4);
             this.groupBox2.Controls.Add(this.label3);
             this.groupBox2.Controls.Add(this.textBoxCustomerName);
+            this.groupBox2.Font = new System.Drawing.Font("Microsoft Sans Serif", 16.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(161)));
             this.groupBox2.Location = new System.Drawing.Point(12, 302);
             this.groupBox2.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.groupBox2.Name = "groupBox2";
@@ -169,7 +172,7 @@
             // 
             this.label7.AutoSize = true;
             this.label7.Font = new System.Drawing.Font("Microsoft Sans Serif", 25.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(161)));
-            this.label7.Location = new System.Drawing.Point(13, 228);
+            this.label7.Location = new System.Drawing.Point(17, 242);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(362, 51);
             this.label7.TabIndex = 24;
@@ -178,7 +181,7 @@
             // textBoxDateRegistered
             // 
             this.textBoxDateRegistered.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(161)));
-            this.textBoxDateRegistered.Location = new System.Drawing.Point(493, 242);
+            this.textBoxDateRegistered.Location = new System.Drawing.Point(497, 256);
             this.textBoxDateRegistered.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.textBoxDateRegistered.Name = "textBoxDateRegistered";
             this.textBoxDateRegistered.ReadOnly = true;
@@ -189,7 +192,7 @@
             // 
             this.label6.AutoSize = true;
             this.label6.Font = new System.Drawing.Font("Microsoft Sans Serif", 25.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(161)));
-            this.label6.Location = new System.Drawing.Point(13, 363);
+            this.label6.Location = new System.Drawing.Point(17, 377);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(181, 51);
             this.label6.TabIndex = 22;
@@ -199,7 +202,7 @@
             // 
             this.textBoxCost.Enabled = false;
             this.textBoxCost.Font = new System.Drawing.Font("Microsoft Sans Serif", 25.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(161)));
-            this.textBoxCost.Location = new System.Drawing.Point(793, 367);
+            this.textBoxCost.Location = new System.Drawing.Point(797, 381);
             this.textBoxCost.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.textBoxCost.Name = "textBoxCost";
             this.textBoxCost.ReadOnly = true;
@@ -211,7 +214,7 @@
             // 
             this.comboBoxLicensePlates.Font = new System.Drawing.Font("Microsoft Sans Serif", 25.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(161)));
             this.comboBoxLicensePlates.FormattingEnabled = true;
-            this.comboBoxLicensePlates.Location = new System.Drawing.Point(493, 97);
+            this.comboBoxLicensePlates.Location = new System.Drawing.Point(497, 111);
             this.comboBoxLicensePlates.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.comboBoxLicensePlates.Name = "comboBoxLicensePlates";
             this.comboBoxLicensePlates.Size = new System.Drawing.Size(520, 59);
@@ -221,8 +224,8 @@
             // 
             // pictureBoxCost
             // 
-            this.pictureBoxCost.Location = new System.Drawing.Point(689, 360);
-            this.pictureBoxCost.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.pictureBoxCost.Location = new System.Drawing.Point(693, 374);
+            this.pictureBoxCost.Margin = new System.Windows.Forms.Padding(4);
             this.pictureBoxCost.Name = "pictureBoxCost";
             this.pictureBoxCost.Size = new System.Drawing.Size(97, 68);
             this.pictureBoxCost.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -231,8 +234,8 @@
             // 
             // pictureBoxCustomer
             // 
-            this.pictureBoxCustomer.Location = new System.Drawing.Point(17, 25);
-            this.pictureBoxCustomer.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.pictureBoxCustomer.Location = new System.Drawing.Point(21, 39);
+            this.pictureBoxCustomer.Margin = new System.Windows.Forms.Padding(4);
             this.pictureBoxCustomer.Name = "pictureBoxCustomer";
             this.pictureBoxCustomer.Size = new System.Drawing.Size(97, 73);
             this.pictureBoxCustomer.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -244,7 +247,7 @@
             this.comboBoxOffers.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
             this.comboBoxOffers.Font = new System.Drawing.Font("Microsoft Sans Serif", 25.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(161)));
             this.comboBoxOffers.FormattingEnabled = true;
-            this.comboBoxOffers.Location = new System.Drawing.Point(493, 166);
+            this.comboBoxOffers.Location = new System.Drawing.Point(497, 180);
             this.comboBoxOffers.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.comboBoxOffers.Name = "comboBoxOffers";
             this.comboBoxOffers.Size = new System.Drawing.Size(520, 59);
@@ -255,29 +258,29 @@
             // 
             this.label5.AutoSize = true;
             this.label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 25.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(161)));
-            this.label5.Location = new System.Drawing.Point(13, 297);
+            this.label5.Location = new System.Drawing.Point(17, 311);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(496, 51);
             this.label5.TabIndex = 9;
             this.label5.Text = "Πλύσεις που απομένουν:";
             // 
-            // textBoxWashes
+            // textBoxWashesLeft
             // 
-            this.textBoxWashes.Enabled = false;
-            this.textBoxWashes.Font = new System.Drawing.Font("Microsoft Sans Serif", 25.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(161)));
-            this.textBoxWashes.Location = new System.Drawing.Point(793, 297);
-            this.textBoxWashes.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.textBoxWashes.Name = "textBoxWashes";
-            this.textBoxWashes.ReadOnly = true;
-            this.textBoxWashes.Size = new System.Drawing.Size(220, 56);
-            this.textBoxWashes.TabIndex = 8;
-            this.textBoxWashes.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.textBoxWashesLeft.Enabled = false;
+            this.textBoxWashesLeft.Font = new System.Drawing.Font("Microsoft Sans Serif", 25.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(161)));
+            this.textBoxWashesLeft.Location = new System.Drawing.Point(797, 311);
+            this.textBoxWashesLeft.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.textBoxWashesLeft.Name = "textBoxWashesLeft";
+            this.textBoxWashesLeft.ReadOnly = true;
+            this.textBoxWashesLeft.Size = new System.Drawing.Size(220, 56);
+            this.textBoxWashesLeft.TabIndex = 8;
+            this.textBoxWashesLeft.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
             // label4
             // 
             this.label4.AutoSize = true;
             this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 25.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(161)));
-            this.label4.Location = new System.Drawing.Point(13, 166);
+            this.label4.Location = new System.Drawing.Point(17, 180);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(360, 51);
             this.label4.TabIndex = 7;
@@ -287,7 +290,7 @@
             // 
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 25.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(161)));
-            this.label3.Location = new System.Drawing.Point(13, 104);
+            this.label3.Location = new System.Drawing.Point(17, 118);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(209, 51);
             this.label3.TabIndex = 5;
@@ -297,7 +300,7 @@
             // 
             this.textBoxCustomerName.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(192)))), ((int)(((byte)(128)))));
             this.textBoxCustomerName.Font = new System.Drawing.Font("Microsoft Sans Serif", 25.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(161)));
-            this.textBoxCustomerName.Location = new System.Drawing.Point(131, 34);
+            this.textBoxCustomerName.Location = new System.Drawing.Point(135, 48);
             this.textBoxCustomerName.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.textBoxCustomerName.Name = "textBoxCustomerName";
             this.textBoxCustomerName.ReadOnly = true;
@@ -306,33 +309,34 @@
             // 
             // groupBox3
             // 
-            this.groupBox3.Controls.Add(this.dataGridViewCustHistory);
-            this.groupBox3.Location = new System.Drawing.Point(11, 842);
+            this.groupBox3.Controls.Add(this.dataGridViewHistory);
+            this.groupBox3.Font = new System.Drawing.Font("Microsoft Sans Serif", 16.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(161)));
+            this.groupBox3.Location = new System.Drawing.Point(11, 868);
             this.groupBox3.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.groupBox3.Name = "groupBox3";
             this.groupBox3.Padding = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.groupBox3.Size = new System.Drawing.Size(1031, 238);
+            this.groupBox3.Size = new System.Drawing.Size(1031, 227);
             this.groupBox3.TabIndex = 2;
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "Επισκέψεις Πελάτη";
             // 
-            // dataGridViewCustHistory
+            // dataGridViewHistory
             // 
-            this.dataGridViewCustHistory.AllowUserToAddRows = false;
-            this.dataGridViewCustHistory.AllowUserToDeleteRows = false;
-            this.dataGridViewCustHistory.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridViewCustHistory.Location = new System.Drawing.Point(17, 26);
-            this.dataGridViewCustHistory.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.dataGridViewCustHistory.Name = "dataGridViewCustHistory";
-            this.dataGridViewCustHistory.ReadOnly = true;
-            this.dataGridViewCustHistory.RowTemplate.Height = 24;
-            this.dataGridViewCustHistory.Size = new System.Drawing.Size(997, 199);
-            this.dataGridViewCustHistory.TabIndex = 0;
+            this.dataGridViewHistory.AllowUserToAddRows = false;
+            this.dataGridViewHistory.AllowUserToDeleteRows = false;
+            this.dataGridViewHistory.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridViewHistory.Location = new System.Drawing.Point(17, 33);
+            this.dataGridViewHistory.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.dataGridViewHistory.Name = "dataGridViewHistory";
+            this.dataGridViewHistory.ReadOnly = true;
+            this.dataGridViewHistory.RowTemplate.Height = 24;
+            this.dataGridViewHistory.Size = new System.Drawing.Size(997, 190);
+            this.dataGridViewHistory.TabIndex = 0;
             // 
             // buttonNewCust
             // 
             this.buttonNewCust.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(161)));
-            this.buttonNewCust.Location = new System.Drawing.Point(15, 21);
+            this.buttonNewCust.Location = new System.Drawing.Point(15, 41);
             this.buttonNewCust.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.buttonNewCust.Name = "buttonNewCust";
             this.buttonNewCust.Size = new System.Drawing.Size(168, 54);
@@ -343,15 +347,17 @@
             // 
             // groupBox4
             // 
+            this.groupBox4.Controls.Add(this.buttonUpdate);
             this.groupBox4.Controls.Add(this.buttonSaveCust);
             this.groupBox4.Controls.Add(this.buttonExit);
             this.groupBox4.Controls.Add(this.buttonDeleteCust);
             this.groupBox4.Controls.Add(this.buttonNewCust);
+            this.groupBox4.Font = new System.Drawing.Font("Microsoft Sans Serif", 16.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(161)));
             this.groupBox4.Location = new System.Drawing.Point(12, 750);
             this.groupBox4.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.groupBox4.Name = "groupBox4";
             this.groupBox4.Padding = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.groupBox4.Size = new System.Drawing.Size(1027, 87);
+            this.groupBox4.Size = new System.Drawing.Size(1027, 109);
             this.groupBox4.TabIndex = 3;
             this.groupBox4.TabStop = false;
             this.groupBox4.Text = "Λειτουργίες";
@@ -360,7 +366,7 @@
             // 
             this.buttonSaveCust.Enabled = false;
             this.buttonSaveCust.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(161)));
-            this.buttonSaveCust.Location = new System.Drawing.Point(211, 21);
+            this.buttonSaveCust.Location = new System.Drawing.Point(211, 41);
             this.buttonSaveCust.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.buttonSaveCust.Name = "buttonSaveCust";
             this.buttonSaveCust.Size = new System.Drawing.Size(168, 54);
@@ -372,7 +378,7 @@
             // buttonExit
             // 
             this.buttonExit.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(161)));
-            this.buttonExit.Location = new System.Drawing.Point(844, 21);
+            this.buttonExit.Location = new System.Drawing.Point(845, 41);
             this.buttonExit.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.buttonExit.Name = "buttonExit";
             this.buttonExit.Size = new System.Drawing.Size(168, 54);
@@ -384,7 +390,7 @@
             // buttonDeleteCust
             // 
             this.buttonDeleteCust.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(161)));
-            this.buttonDeleteCust.Location = new System.Drawing.Point(411, 21);
+            this.buttonDeleteCust.Location = new System.Drawing.Point(407, 41);
             this.buttonDeleteCust.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.buttonDeleteCust.Name = "buttonDeleteCust";
             this.buttonDeleteCust.Size = new System.Drawing.Size(168, 54);
@@ -397,10 +403,11 @@
             // 
             this.groupBox5.Controls.Add(this.pictureBoxClock);
             this.groupBox5.Controls.Add(this.labelDateTime);
+            this.groupBox5.Font = new System.Drawing.Font("Microsoft Sans Serif", 16.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(161)));
             this.groupBox5.Location = new System.Drawing.Point(12, 14);
-            this.groupBox5.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.groupBox5.Margin = new System.Windows.Forms.Padding(4);
             this.groupBox5.Name = "groupBox5";
-            this.groupBox5.Padding = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.groupBox5.Padding = new System.Windows.Forms.Padding(4);
             this.groupBox5.Size = new System.Drawing.Size(1029, 116);
             this.groupBox5.TabIndex = 4;
             this.groupBox5.TabStop = false;
@@ -408,10 +415,10 @@
             // 
             // pictureBoxClock
             // 
-            this.pictureBoxClock.Location = new System.Drawing.Point(17, 25);
-            this.pictureBoxClock.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.pictureBoxClock.Location = new System.Drawing.Point(17, 37);
+            this.pictureBoxClock.Margin = new System.Windows.Forms.Padding(4);
             this.pictureBoxClock.Name = "pictureBoxClock";
-            this.pictureBoxClock.Size = new System.Drawing.Size(97, 81);
+            this.pictureBoxClock.Size = new System.Drawing.Size(97, 65);
             this.pictureBoxClock.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pictureBoxClock.TabIndex = 16;
             this.pictureBoxClock.TabStop = false;
@@ -430,17 +437,30 @@
             this.timer.Enabled = true;
             this.timer.Tick += new System.EventHandler(this.timer_Tick);
             // 
+            // buttonUpdate
+            // 
+            this.buttonUpdate.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(161)));
+            this.buttonUpdate.Location = new System.Drawing.Point(600, 41);
+            this.buttonUpdate.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.buttonUpdate.Name = "buttonUpdate";
+            this.buttonUpdate.Size = new System.Drawing.Size(168, 54);
+            this.buttonUpdate.TabIndex = 15;
+            this.buttonUpdate.Text = "ΑΝΑΝΕΩΣΗ";
+            this.buttonUpdate.UseVisualStyleBackColor = true;
+            this.buttonUpdate.Click += new System.EventHandler(this.buttonUpdate_Click);
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1056, 1088);
+            this.ClientSize = new System.Drawing.Size(1056, 1106);
             this.Controls.Add(this.groupBox5);
             this.Controls.Add(this.groupBox4);
             this.Controls.Add(this.groupBox3);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.groupBox1);
-            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "MainForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "AquaLine - Προπληρωμένες Κάρτες Πλύσεων";
@@ -453,7 +473,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxCost)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxCustomer)).EndInit();
             this.groupBox3.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewCustHistory)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewHistory)).EndInit();
             this.groupBox4.ResumeLayout(false);
             this.groupBox5.ResumeLayout(false);
             this.groupBox5.PerformLayout();
@@ -474,9 +494,9 @@
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.GroupBox groupBox3;
-        private System.Windows.Forms.DataGridView dataGridViewCustHistory;
+        private System.Windows.Forms.DataGridView dataGridViewHistory;
         private System.Windows.Forms.Label label5;
-        private System.Windows.Forms.TextBox textBoxWashes;
+        private System.Windows.Forms.TextBox textBoxWashesLeft;
         private System.Windows.Forms.ComboBox comboBoxOffers;
         private System.Windows.Forms.Button buttonNewCust;
         private System.Windows.Forms.GroupBox groupBox4;
@@ -495,6 +515,7 @@
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.TextBox textBoxDateRegistered;
         private System.Windows.Forms.Timer timer;
+        private System.Windows.Forms.Button buttonUpdate;
 
     }
 }
