@@ -159,7 +159,7 @@ namespace Aqua.Library
 
     public struct OffersObject
     {
-        public String Id;
+        public int Id;
         public String Desc;
         public double Cost;
         public uint Visits;
@@ -173,8 +173,9 @@ namespace Aqua.Library
 
     public struct BarcodeCustomerObject
     {
-        public String BarcodeId;
-        public String OfferId;
+        public String AbbreviationId;
+        public String BarcodeId; 
+        public int OfferId;
         public DateTime DateRegistered;
     }
 
@@ -331,8 +332,9 @@ namespace Aqua.Library
 
             if (DBTable.Rows.Count > 0)
             {
+                barcodeCust.AbbreviationId = DBTable.Rows[0]["ABBREVIATION"].ToString();
                 barcodeCust.BarcodeId = DBTable.Rows[0]["BARCODEID"].ToString();
-                barcodeCust.OfferId = DBTable.Rows[0]["OFFERID"].ToString();
+                barcodeCust.OfferId = Convert.ToInt16(DBTable.Rows[0]["OFFERID"].ToString());
                 barcodeCust.DateRegistered = Convert.ToDateTime(DBTable.Rows[0]["DATEREGISTERED"].ToString());
 
                 custObjects[0] = barcodeCust;                
@@ -356,7 +358,7 @@ namespace Aqua.Library
 
             // find customer in SINGULAR's tables...               
             customerO = this.GetCustomerWithAbbreviation(abbreviationId);
-            if (customerO.Name == null)
+            if (customerO.Name == null && barcodeId.Equals(""))
             {
                 return null;
             }
@@ -367,7 +369,7 @@ namespace Aqua.Library
             if (abbreviationId.Equals("") && !barcodeId.Equals(""))
                 SQLQuery += " WHERE BARCODEID = '" + barcodeId + "'";
             if (!abbreviationId.Equals("") && barcodeId.Equals(""))
-                SQLQuery += " WHERE ABBREVIATION = '" + barcodeId + "'";
+                SQLQuery += " WHERE ABBREVIATION = '" + abbreviationId + "'";
             if (!abbreviationId.Equals("") && !barcodeId.Equals(""))
                 SQLQuery += " WHERE ABBREVIATION = '" + abbreviationId + "' AND BARCODEID = '" + barcodeId + "'";               
 
@@ -382,8 +384,9 @@ namespace Aqua.Library
 
             if (DBTable.Rows.Count > 0)
             {
+                barcodeCust.AbbreviationId = DBTable.Rows[0]["ABBREVIATION"].ToString();
                 barcodeCust.BarcodeId = DBTable.Rows[0]["BARCODEID"].ToString();
-                barcodeCust.OfferId = DBTable.Rows[0]["OFFERID"].ToString();
+                barcodeCust.OfferId = Convert.ToInt16(DBTable.Rows[0]["OFFERID"].ToString());
                 barcodeCust.DateRegistered = Convert.ToDateTime(DBTable.Rows[0]["DATEREGISTERED"].ToString());
 
                 custObjects[0] = barcodeCust;
@@ -437,7 +440,7 @@ namespace Aqua.Library
         public List<OffersObject> GetAllOffers()
         {
             List<OffersObject> offersObjects = null;
-            String SQLQuery = "SELECT * FROM " + Properties.Resources.BarcodeOffersTable;
+            String SQLQuery = "SELECT * FROM " + Properties.Resources.BarcodeOffersTable + " ORDER BY VISITS";
             DataTable DBTable = this.RefreshSQLConnection(SQLQuery, Properties.Resources.BarcodeOffersTable);
             
             if (DBTable == null)
@@ -449,7 +452,7 @@ namespace Aqua.Library
                 foreach (DataRow dataRow in DBTable.Rows)
                 {
                     OffersObject o = new OffersObject();
-                    o.Id = dataRow["ID"].ToString();
+                    o.Id = Convert.ToInt16(dataRow["ID"].ToString());
                     o.Desc = dataRow["DESCRIPTION"].ToString();
                     o.Cost = Convert.ToDouble(dataRow["COST"].ToString());
                     o.Visits = Convert.ToUInt16(dataRow["VISITS"].ToString());
@@ -467,13 +470,21 @@ namespace Aqua.Library
             return this.RefreshSQLConnection(SQLQuery, Properties.Resources.CustomersTable);
         }
 
-        public int GetNumberOfVisits(string offerId)
+        public int GetNumberOfVisits(int offerId)
         {
             String SQLQuery = "SELECT VISITS FROM ";
             SQLQuery += Properties.Resources.BarcodeOffersTable;
             SQLQuery += " WHERE ID = '" + offerId + "'";
             DataTable dbTable = this.RefreshSQLOffersConnection(SQLQuery, Properties.Resources.BarcodeCustomersHistoryTable);
             return Convert.ToInt32(dbTable.Rows[0]["VISITS"].ToString());
+        }
+
+        public DataTable GetCustomerWithBarcode(string barcodeId)
+        {
+            String SQLQuery = "SELECT * FROM ";
+            SQLQuery += Properties.Resources.BarcodeCustomersTable;
+            SQLQuery += " WHERE BARCODEID = '" + barcodeId + "'";
+            return this.RefreshSQLConnection(SQLQuery, Properties.Resources.BarcodeCustomersTable);
         }
 
         public DataTable GetCustomerHistory(string barcodeid)
@@ -500,7 +511,7 @@ namespace Aqua.Library
         public bool IsCustomerAlreadyRegistered(String barcodeId, String abbreviationId)
         {
             String SQLQuery = "SELECT * FROM " + Properties.Resources.BarcodeCustomersTable +
-                              " WHERE BARCODEID = '" + barcodeId + "' AND ABBREVIATION = '" + abbreviationId + "'";
+                              " WHERE BARCODEID = '" + barcodeId + "' OR ABBREVIATION = '" + abbreviationId + "'";
             DataTable dataTable = this.RefreshSQLConnection(SQLQuery, Properties.Resources.BarcodeCustomersTable);
             if (dataTable != null)
             {
@@ -508,6 +519,25 @@ namespace Aqua.Library
                     return true;
             }
             return false;
+        }
+
+        public void UpdateOfferForBarcodeCustomer(String barcodeId, String abbreviationId, int offerId, double cost)
+        {
+            String UpdateSQLQuery = "UPDATE " +
+                        Properties.Resources.BarcodeCustomersTable +
+                        " SET OFFERID = @OFFERID, MONEYLEFT = @MONEYLEFT" +
+                        " WHERE BARCODEID = '" + barcodeId + "' AND ABBREVIATION = '" + abbreviationId + "'";
+
+            SqlCommand mySqlCommand = this.globalSQLConnection.CreateCommand();
+            mySqlCommand.CommandText = UpdateSQLQuery;
+
+            mySqlCommand.Parameters.Add("@OFFERID", SqlDbType.Int);
+            mySqlCommand.Parameters["@OFFERID"].Value = offerId;
+            mySqlCommand.Parameters.Add("@MONEYLEFT", SqlDbType.Money);
+            mySqlCommand.Parameters["@MONEYLEFT"].Value = cost;
+
+            mySqlCommand.ExecuteNonQuery();
+            mySqlCommand.Dispose();
         }
 
         public void UpdateBarcodeCustomers(String barcodeId, String abbreviationId, double cost)
@@ -527,7 +557,7 @@ namespace Aqua.Library
             mySqlCommand.Dispose();
         }
 
-        public bool InsertIntoBarcodeCustomers(String barcodeId, String abbreviationId, String OfferId, DateTime dateRegistered, double cost)
+        public bool InsertIntoBarcodeCustomers(String barcodeId, String abbreviationId, int OfferId, DateTime dateRegistered, double cost)
         {
             String InsertSQLQuery = "INSERT INTO " +
                            Properties.Resources.BarcodeCustomersTable +
@@ -539,7 +569,7 @@ namespace Aqua.Library
             
             mySqlCommand.Parameters.Add("@BARCODEID", SqlDbType.VarChar);
             mySqlCommand.Parameters.Add("@ABBREVIATION", SqlDbType.VarChar);
-            mySqlCommand.Parameters.Add("@OFFERID", SqlDbType.VarChar);
+            mySqlCommand.Parameters.Add("@OFFERID", SqlDbType.Int);
             mySqlCommand.Parameters.Add("@DATEREGISTERED", SqlDbType.DateTime);
             mySqlCommand.Parameters.Add("@MONEYLEFT", SqlDbType.Money);
 
@@ -562,7 +592,7 @@ namespace Aqua.Library
             return true;
         }
 
-        public bool InsertIntoBarcodeHistory(string barcodeId, string offerId)
+        public bool InsertIntoBarcodeHistory(string barcodeId, int offerId)
         {
             String InsertSQLQuery = "INSERT INTO " +
                            Properties.Resources.BarcodeCustomersHistoryTable +
@@ -574,7 +604,7 @@ namespace Aqua.Library
 
             mySqlCommand.Parameters.Add("@BARCODEID", SqlDbType.VarChar);
             mySqlCommand.Parameters.Add("@VISITDATE", SqlDbType.DateTime);
-            mySqlCommand.Parameters.Add("@OFFERID", SqlDbType.VarChar);
+            mySqlCommand.Parameters.Add("@OFFERID", SqlDbType.Int);
 
             mySqlCommand.Parameters["@BARCODEID"].Value = barcodeId;
             mySqlCommand.Parameters["@VISITDATE"].Value = DateTime.Now;

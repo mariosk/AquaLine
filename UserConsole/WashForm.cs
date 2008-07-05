@@ -40,7 +40,7 @@ namespace Aqua.User
             BarcodeCustomerObject barcodeCust;
             CustomerObject customerO;
 
-            barcodeCust.OfferId = null;
+            barcodeCust.OfferId = -1;
             barcodeCust.DateRegistered = DateTime.Today;
             barcodeCust.BarcodeId = "";
             customerO.Name = null;
@@ -59,7 +59,7 @@ namespace Aqua.User
             if (custObjects[1] != null)
                 customerO = (CustomerObject)custObjects[1];
 
-            if (barcodeCust.OfferId != null)
+            if (barcodeCust.OfferId >= 0)
             {                
                 // select the appropriate offer combo item
                 for (int i = 0; i < this.offers.Count; i++)
