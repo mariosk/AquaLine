@@ -152,13 +152,16 @@ namespace Aqua.Admin
                 this.textBoxAbbreviation.Text = barcodeCust.AbbreviationId;
 
                 DataTable dbTable = library.GetCustomerHistory(textBoxBarCode.Text.Trim());
-                this.dataGridViewHistory.DataSource = dbTable;
+                this.dataGridViewHistory.DataSource = dbTable;                                
                 dataGridViewHistory.Columns[dbTable.Columns.IndexOf("BARCODEID")].Visible = false;
+                dataGridViewHistory.Columns[dbTable.Columns.IndexOf("COST")].Visible = false;
+                dataGridViewHistory.Columns[dbTable.Columns.IndexOf("VISITS")].Visible = false;
                 dataGridViewHistory.Columns[dbTable.Columns.IndexOf("OFFERID")].Visible = false;
+                dataGridViewHistory.Columns[dbTable.Columns.IndexOf("ID")].Visible = false;                
+                dataGridViewHistory.Columns[dbTable.Columns.IndexOf("DESCRIPTION")].HeaderText = "Πακέτο πλύσης";
                 dataGridViewHistory.Columns[dbTable.Columns.IndexOf("VISITDATE")].HeaderText = "Ημερομηνία";
-                dataGridViewHistory.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells;
-                int offerVisits = this.library.GetNumberOfVisits(this.offers[this.comboBoxOffers.SelectedIndex].Id);
-                int visitsLeft = offerVisits - dbTable.Rows.Count;
+                dataGridViewHistory.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+                int visitsLeft = (int)(this.offers[this.comboBoxOffers.SelectedIndex].Visits - this.library.GetNumberOfVisits(textBoxBarCode.Text.Trim(), barcodeCust.DateRegistered, this.offers[this.comboBoxOffers.SelectedIndex].Id));
                 this.textBoxWashesLeft.Text = visitsLeft.ToString();
                 if (visitsLeft <= 0)
                 {                   
@@ -281,8 +284,7 @@ namespace Aqua.Admin
             DialogResult dr = MainLibrary.dummyFrm.MsgBoxQuestion("Είστε σίγουροι για την ανανέωση;");
             if (dr == DialogResult.Yes)
             {
-                int i = this.comboBoxOffers.SelectedIndex;
-                this.library.DeleteBarcodeHistory(textBoxBarCode.Text.Trim());
+                int i = this.comboBoxOffers.SelectedIndex;                
                 this.library.UpdateOfferForBarcodeCustomer(textBoxBarCode.Text.Trim(), textBoxAbbreviation.Text.Trim(), i, this.offers[i].Cost);
                 MainLibrary.dummyFrm.MsgBoxInformation("Ανανεώθηκε με επιτυχία!", "Ανανέωση");
                 this.ClearAllTextBoxes(true);

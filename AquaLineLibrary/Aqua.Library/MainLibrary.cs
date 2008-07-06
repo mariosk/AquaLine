@@ -334,7 +334,7 @@ namespace Aqua.Library
             {
                 barcodeCust.AbbreviationId = DBTable.Rows[0]["ABBREVIATION"].ToString();
                 barcodeCust.BarcodeId = DBTable.Rows[0]["BARCODEID"].ToString();
-                barcodeCust.OfferId = Convert.ToInt16(DBTable.Rows[0]["OFFERID"].ToString());
+                barcodeCust.OfferId = Convert.ToInt32(DBTable.Rows[0]["OFFERID"].ToString());
                 barcodeCust.DateRegistered = Convert.ToDateTime(DBTable.Rows[0]["DATEREGISTERED"].ToString());
 
                 custObjects[0] = barcodeCust;                
@@ -386,7 +386,7 @@ namespace Aqua.Library
             {
                 barcodeCust.AbbreviationId = DBTable.Rows[0]["ABBREVIATION"].ToString();
                 barcodeCust.BarcodeId = DBTable.Rows[0]["BARCODEID"].ToString();
-                barcodeCust.OfferId = Convert.ToInt16(DBTable.Rows[0]["OFFERID"].ToString());
+                barcodeCust.OfferId = Convert.ToInt32(DBTable.Rows[0]["OFFERID"].ToString());
                 barcodeCust.DateRegistered = Convert.ToDateTime(DBTable.Rows[0]["DATEREGISTERED"].ToString());
 
                 custObjects[0] = barcodeCust;
@@ -452,10 +452,10 @@ namespace Aqua.Library
                 foreach (DataRow dataRow in DBTable.Rows)
                 {
                     OffersObject o = new OffersObject();
-                    o.Id = Convert.ToInt16(dataRow["ID"].ToString());
+                    o.Id = Convert.ToInt32(dataRow["ID"].ToString());
                     o.Desc = dataRow["DESCRIPTION"].ToString();
                     o.Cost = Convert.ToDouble(dataRow["COST"].ToString());
-                    o.Visits = Convert.ToUInt16(dataRow["VISITS"].ToString());
+                    o.Visits = Convert.ToUInt32(dataRow["VISITS"].ToString());
                     offersObjects.Add(o);
                 }                                
                 DBTable.Clear();
@@ -470,13 +470,19 @@ namespace Aqua.Library
             return this.RefreshSQLConnection(SQLQuery, Properties.Resources.CustomersTable);
         }
 
-        public int GetNumberOfVisits(int offerId)
+        public int GetNumberOfVisits(string barcodeId, DateTime dateRegistered, int offerId)
         {
-            String SQLQuery = "SELECT VISITS FROM ";
-            SQLQuery += Properties.Resources.BarcodeOffersTable;
-            SQLQuery += " WHERE ID = '" + offerId + "'";
+            string dateString = dateRegistered.Month + "/" + dateRegistered.Day + "/" + dateRegistered.Year;
+            dateString += " " + dateRegistered.Hour + ":" + dateRegistered.Minute + ":" + dateRegistered.Second;
+            String SQLQuery = "SELECT * FROM ";
+            SQLQuery += Properties.Resources.BarcodeCustomersHistoryTable;
+            SQLQuery += " WHERE BARCODEID = '" + barcodeId + "' AND DATEDIFF(minute, '" + dateString + "', VISITDATE) >= 0";
+            SQLQuery += " AND OFFERID = '" + offerId + "'";
             DataTable dbTable = this.RefreshSQLOffersConnection(SQLQuery, Properties.Resources.BarcodeCustomersHistoryTable);
-            return Convert.ToInt32(dbTable.Rows[0]["VISITS"].ToString());
+            if (dbTable == null)
+                return 0;
+            else
+                return dbTable.Rows.Count;
         }
 
         public DataTable GetCustomerWithBarcode(string barcodeId)
@@ -491,7 +497,11 @@ namespace Aqua.Library
         {
             String SQLQuery = "SELECT * FROM ";
             SQLQuery += Properties.Resources.BarcodeCustomersHistoryTable;
-            SQLQuery += " WHERE BARCODEID = '" + barcodeid + "' ORDER BY VISITDATE DESC";
+            SQLQuery += ",";
+            SQLQuery += Properties.Resources.BarcodeOffersTable;
+            SQLQuery += " WHERE BARCODEID = '" + barcodeid + "'";
+            SQLQuery += " AND OFFERID = ID";                 
+            SQLQuery += " ORDER BY VISITDATE DESC";
             return this.RefreshSQLConnection(SQLQuery, Properties.Resources.BarcodeCustomersHistoryTable);
         }
 
@@ -525,33 +535,19 @@ namespace Aqua.Library
         {
             String UpdateSQLQuery = "UPDATE " +
                         Properties.Resources.BarcodeCustomersTable +
-                        " SET OFFERID = @OFFERID, MONEYLEFT = @MONEYLEFT" +
+                        " SET OFFERID = @OFFERID, MONEYLEFT = @MONEYLEFT, DATEREGISTERED = @DATEREGISTERED" +
                         " WHERE BARCODEID = '" + barcodeId + "' AND ABBREVIATION = '" + abbreviationId + "'";
 
             SqlCommand mySqlCommand = this.globalSQLConnection.CreateCommand();
             mySqlCommand.CommandText = UpdateSQLQuery;
 
             mySqlCommand.Parameters.Add("@OFFERID", SqlDbType.Int);
+            mySqlCommand.Parameters.Add("@MONEYLEFT", SqlDbType.Money);
+            mySqlCommand.Parameters.Add("@DATEREGISTERED", SqlDbType.DateTime);            
+
             mySqlCommand.Parameters["@OFFERID"].Value = offerId;
-            mySqlCommand.Parameters.Add("@MONEYLEFT", SqlDbType.Money);
             mySqlCommand.Parameters["@MONEYLEFT"].Value = cost;
-
-            mySqlCommand.ExecuteNonQuery();
-            mySqlCommand.Dispose();
-        }
-
-        public void UpdateBarcodeCustomers(String barcodeId, String abbreviationId, double cost)
-        {
-            String UpdateSQLQuery = "UPDATE " +
-                        Properties.Resources.BarcodeCustomersTable +
-                        " SET MONEYLEFT = @MONEYLEFT" +
-                        " WHERE BARCODEID = '" + barcodeId + "' AND ABBREVIATION = '" + abbreviationId + "'";
-
-            SqlCommand mySqlCommand = this.globalSQLConnection.CreateCommand();
-            mySqlCommand.CommandText = UpdateSQLQuery;
-
-            mySqlCommand.Parameters.Add("@MONEYLEFT", SqlDbType.Money);
-            mySqlCommand.Parameters["@MONEYLEFT"].Value = cost;
+            mySqlCommand.Parameters["@DATEREGISTERED"].Value = DateTime.Now;            
 
             mySqlCommand.ExecuteNonQuery();
             mySqlCommand.Dispose();

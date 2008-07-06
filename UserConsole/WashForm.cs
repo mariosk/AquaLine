@@ -15,6 +15,7 @@ namespace Aqua.User
         private List<OffersObject> offers;
         private int selectedOffer;
         private bool readOnly;
+        private BarcodeCustomerObject barcodeCust;
 
         public WashForm(MainLibrary library, bool readOnly)
         {
@@ -36,8 +37,7 @@ namespace Aqua.User
         }
 
         private bool FindUserInDatabase()
-        {
-            BarcodeCustomerObject barcodeCust;
+        {            
             CustomerObject customerO;
 
             barcodeCust.OfferId = -1;
@@ -119,11 +119,14 @@ namespace Aqua.User
                         DataTable dbTable = library.GetCustomerHistory(textBoxBarCode.Text.Trim());
                         this.dataGridViewHistory.DataSource = dbTable;
                         dataGridViewHistory.Columns[dbTable.Columns.IndexOf("BARCODEID")].Visible = false;
+                        dataGridViewHistory.Columns[dbTable.Columns.IndexOf("COST")].Visible = false;
+                        dataGridViewHistory.Columns[dbTable.Columns.IndexOf("VISITS")].Visible = false;
                         dataGridViewHistory.Columns[dbTable.Columns.IndexOf("OFFERID")].Visible = false;
+                        dataGridViewHistory.Columns[dbTable.Columns.IndexOf("ID")].Visible = false;
+                        dataGridViewHistory.Columns[dbTable.Columns.IndexOf("DESCRIPTION")].HeaderText = "Πακέτο πλύσης";
                         dataGridViewHistory.Columns[dbTable.Columns.IndexOf("VISITDATE")].HeaderText = "Ημερομηνία";
-                        dataGridViewHistory.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells;
-                        int offerVisits = this.library.GetNumberOfVisits(this.offers[this.selectedOffer].Id);
-                        int visitsLeft = offerVisits - dbTable.Rows.Count;                        
+                        dataGridViewHistory.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+                        int visitsLeft = (int)(this.offers[this.selectedOffer].Visits - this.library.GetNumberOfVisits(textBoxBarCode.Text.Trim(), barcodeCust.DateRegistered, this.offers[this.selectedOffer].Id));                        
                         this.textBoxWashesLeft.Text = visitsLeft.ToString();
                         if (visitsLeft <= 0)
                         {
