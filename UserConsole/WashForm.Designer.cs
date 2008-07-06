@@ -68,9 +68,9 @@
             this.groupBox1.Controls.Add(this.label2);
             this.groupBox1.Controls.Add(this.textBoxBarCode);
             this.groupBox1.Location = new System.Drawing.Point(11, 111);
-            this.groupBox1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.groupBox1.Margin = new System.Windows.Forms.Padding(2);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Padding = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.groupBox1.Padding = new System.Windows.Forms.Padding(2);
             this.groupBox1.Size = new System.Drawing.Size(773, 93);
             this.groupBox1.TabIndex = 4;
             this.groupBox1.TabStop = false;
@@ -100,7 +100,7 @@
             // 
             this.textBoxBarCode.Font = new System.Drawing.Font("Microsoft Sans Serif", 36F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(161)));
             this.textBoxBarCode.Location = new System.Drawing.Point(473, 18);
-            this.textBoxBarCode.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.textBoxBarCode.Margin = new System.Windows.Forms.Padding(2);
             this.textBoxBarCode.Name = "textBoxBarCode";
             this.textBoxBarCode.Size = new System.Drawing.Size(285, 62);
             this.textBoxBarCode.TabIndex = 0;
@@ -152,9 +152,9 @@
             this.groupBox2.Controls.Add(this.textBoxCustomerName);
             this.groupBox2.Font = new System.Drawing.Font("Microsoft Sans Serif", 16.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(161)));
             this.groupBox2.Location = new System.Drawing.Point(12, 218);
-            this.groupBox2.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.groupBox2.Margin = new System.Windows.Forms.Padding(2);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Padding = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.groupBox2.Padding = new System.Windows.Forms.Padding(2);
             this.groupBox2.Size = new System.Drawing.Size(773, 292);
             this.groupBox2.TabIndex = 6;
             this.groupBox2.TabStop = false;
@@ -165,7 +165,7 @@
             this.textBoxOffer.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
             this.textBoxOffer.Font = new System.Drawing.Font("Microsoft Sans Serif", 25.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(161)));
             this.textBoxOffer.Location = new System.Drawing.Point(370, 141);
-            this.textBoxOffer.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.textBoxOffer.Margin = new System.Windows.Forms.Padding(2);
             this.textBoxOffer.Name = "textBoxOffer";
             this.textBoxOffer.ReadOnly = true;
             this.textBoxOffer.Size = new System.Drawing.Size(391, 46);
@@ -185,19 +185,20 @@
             // textBoxDateRegistered
             // 
             this.textBoxDateRegistered.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(161)));
-            this.textBoxDateRegistered.Location = new System.Drawing.Point(370, 198);
-            this.textBoxDateRegistered.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.textBoxDateRegistered.Location = new System.Drawing.Point(303, 198);
+            this.textBoxDateRegistered.Margin = new System.Windows.Forms.Padding(2);
             this.textBoxDateRegistered.Name = "textBoxDateRegistered";
             this.textBoxDateRegistered.ReadOnly = true;
-            this.textBoxDateRegistered.Size = new System.Drawing.Size(391, 31);
+            this.textBoxDateRegistered.Size = new System.Drawing.Size(458, 31);
             this.textBoxDateRegistered.TabIndex = 23;
+            this.textBoxDateRegistered.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
             // comboBoxLicensePlates
             // 
             this.comboBoxLicensePlates.Font = new System.Drawing.Font("Microsoft Sans Serif", 25.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(161)));
             this.comboBoxLicensePlates.FormattingEnabled = true;
             this.comboBoxLicensePlates.Location = new System.Drawing.Point(370, 84);
-            this.comboBoxLicensePlates.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.comboBoxLicensePlates.Margin = new System.Windows.Forms.Padding(2);
             this.comboBoxLicensePlates.Name = "comboBoxLicensePlates";
             this.comboBoxLicensePlates.Size = new System.Drawing.Size(391, 47);
             this.comboBoxLicensePlates.Sorted = true;
@@ -228,7 +229,7 @@
             this.textBoxWashesLeft.Enabled = false;
             this.textBoxWashesLeft.Font = new System.Drawing.Font("Microsoft Sans Serif", 25.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(161)));
             this.textBoxWashesLeft.Location = new System.Drawing.Point(595, 239);
-            this.textBoxWashesLeft.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.textBoxWashesLeft.Margin = new System.Windows.Forms.Padding(2);
             this.textBoxWashesLeft.Name = "textBoxWashesLeft";
             this.textBoxWashesLeft.ReadOnly = true;
             this.textBoxWashesLeft.Size = new System.Drawing.Size(166, 46);
@@ -262,7 +263,7 @@
             this.textBoxCustomerName.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(192)))), ((int)(((byte)(128)))));
             this.textBoxCustomerName.Font = new System.Drawing.Font("Microsoft Sans Serif", 25.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(161)));
             this.textBoxCustomerName.Location = new System.Drawing.Point(104, 29);
-            this.textBoxCustomerName.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.textBoxCustomerName.Margin = new System.Windows.Forms.Padding(2);
             this.textBoxCustomerName.Name = "textBoxCustomerName";
             this.textBoxCustomerName.ReadOnly = true;
             this.textBoxCustomerName.Size = new System.Drawing.Size(656, 46);
@@ -272,7 +273,7 @@
             // 
             this.buttonWash.Font = new System.Drawing.Font("Microsoft Sans Serif", 16.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(161)));
             this.buttonWash.Location = new System.Drawing.Point(286, 519);
-            this.buttonWash.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.buttonWash.Margin = new System.Windows.Forms.Padding(2);
             this.buttonWash.Name = "buttonWash";
             this.buttonWash.Size = new System.Drawing.Size(226, 46);
             this.buttonWash.TabIndex = 7;
@@ -285,9 +286,9 @@
             this.groupBox3.Controls.Add(this.dataGridViewHistory);
             this.groupBox3.Font = new System.Drawing.Font("Microsoft Sans Serif", 16.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(161)));
             this.groupBox3.Location = new System.Drawing.Point(11, 567);
-            this.groupBox3.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.groupBox3.Margin = new System.Windows.Forms.Padding(2);
             this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Padding = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.groupBox3.Padding = new System.Windows.Forms.Padding(2);
             this.groupBox3.Size = new System.Drawing.Size(771, 203);
             this.groupBox3.TabIndex = 8;
             this.groupBox3.TabStop = false;
@@ -297,7 +298,7 @@
             // 
             this.dataGridViewHistory.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridViewHistory.Location = new System.Drawing.Point(6, 32);
-            this.dataGridViewHistory.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.dataGridViewHistory.Margin = new System.Windows.Forms.Padding(2);
             this.dataGridViewHistory.Name = "dataGridViewHistory";
             this.dataGridViewHistory.ReadOnly = true;
             this.dataGridViewHistory.RowHeadersWidth = 50;

@@ -491,7 +491,7 @@ namespace Aqua.Library
         {
             String SQLQuery = "SELECT * FROM ";
             SQLQuery += Properties.Resources.BarcodeCustomersHistoryTable;
-            SQLQuery += " WHERE BARCODEID = '" + barcodeid + "'";
+            SQLQuery += " WHERE BARCODEID = '" + barcodeid + "' ORDER BY VISITDATE DESC";
             return this.RefreshSQLConnection(SQLQuery, Properties.Resources.BarcodeCustomersHistoryTable);
         }
 

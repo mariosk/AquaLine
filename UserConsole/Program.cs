@@ -13,7 +13,7 @@ namespace Aqua.User
         /// </summary>
         [STAThread]
         static void Main()
-        {
+        {            
             String ipAddress = ConfigurationSettings.AppSettings["mssqlIpAddress"].ToString();
             String dbName = ConfigurationSettings.AppSettings["mssqlDbName"].ToString();
             String comPort = ConfigurationSettings.AppSettings["comPort"].ToString();

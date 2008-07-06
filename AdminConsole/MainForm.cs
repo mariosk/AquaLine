@@ -14,12 +14,14 @@ namespace Aqua.Admin
     {        
         private MainLibrary library;
         private List<OffersObject> offers;
+        private bool EnterProcessing;
 
         public MainForm(MainLibrary library)
         {
             InitializeComponent();
             this.library = library;
             this.library.SetAppTextBoxCallBack(this.textBoxBarCode, this);
+            this.EnterProcessing = false;
         }
 
         private void MainForm_Load(object sender, EventArgs e)
@@ -85,7 +87,7 @@ namespace Aqua.Admin
         private void EnterPressed()
         {
             BarcodeCustomerObject barcodeCust;
-            CustomerObject customerO;
+            CustomerObject customerO;            
 
             customerO.Name = null;
             customerO.LicensePlates = null;
@@ -94,8 +96,9 @@ namespace Aqua.Admin
             barcodeCust.BarcodeId = null;
             barcodeCust.AbbreviationId = null;
             Object[] custObjects = null;
+            this.comboBoxLicensePlates.Items.Clear();
 
-            if (!this.textBoxAbbreviation.Enabled)
+            if (!this.textBoxAbbreviation.Enabled || this.textBoxAbbreviation.Text.Trim().Equals(""))
                 custObjects = this.library.GetCustomerWithBarcodeId(this.textBoxBarCode.Text.Trim());
             else
                 custObjects = this.library.GetCustomerWithAbbreviationOrBarcodeId(this.textBoxAbbreviation.Text.Trim(), this.textBoxBarCode.Text.Trim());
@@ -104,6 +107,13 @@ namespace Aqua.Admin
             {
                 this.ClearAllTextBoxes(false);
                 MainLibrary.dummyFrm.MsgBoxError("Δεν υπάρχει πελάτης με αυτή τη συντομογραφία!");
+                return;
+            }
+
+            if (custObjects[0] == null)
+            {
+                this.ClearAllTextBoxes(false);
+                MainLibrary.dummyFrm.MsgBoxError("Δεν υπάρχει πελάτης με αυτό το κωδικό κάρτας!");
                 return;
             }
 
@@ -129,6 +139,7 @@ namespace Aqua.Admin
                 }
             }
 
+            this.EnterProcessing = true;
             if (barcodeCust.OfferId >= 0)
             {
                 MainLibrary.dummyFrm.MsgBoxInformation("Αυτός ο πελάτης έχει ήδη καταχωρηθεί!", "Πελάτης");
@@ -155,11 +166,14 @@ namespace Aqua.Admin
                 }
             }
             this.textBoxCustomerName.Text = customerO.Name;
-            for (int i = 0; i < customerO.LicensePlates.Length; i++)
-                this.comboBoxLicensePlates.Items.Add(customerO.LicensePlates[i]);
-
-            if (this.comboBoxLicensePlates.Items.Count > 0)
-                this.comboBoxLicensePlates.SelectedIndex = 0;
+            if (customerO.LicensePlates != null)
+            {
+                for (int i = 0; i < customerO.LicensePlates.Length; i++)
+                    this.comboBoxLicensePlates.Items.Add(customerO.LicensePlates[i]);
+                if (this.comboBoxLicensePlates.Items.Count > 0)
+                    this.comboBoxLicensePlates.SelectedIndex = 0;
+            }
+            this.EnterProcessing = false;
         }
 
         private void textBoxAbbreviation_KeyPress(object sender, KeyPressEventArgs e)
@@ -285,6 +299,8 @@ namespace Aqua.Admin
             //MainLibrary.dummyFrm.MsgBox("changed to " + this.textBoxBarCode.Text);
             if (MainLibrary.dummyFrm.IsTextBoxReady())
             {
+                if (this.EnterProcessing)
+                    return;
                 if (this.textBoxAbbreviation.Text.Trim().Equals(""))
                     this.ClearAllTextBoxes(false);
                 if (!this.textBoxBarCode.Text.Trim().Equals(""))

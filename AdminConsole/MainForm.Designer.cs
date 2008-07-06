@@ -37,6 +37,8 @@
             this.labelBarCode = new System.Windows.Forms.Label();
             this.textBoxBarCode = new System.Windows.Forms.TextBox();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.label2 = new System.Windows.Forms.Label();
+            this.textBoxOfferWashes = new System.Windows.Forms.TextBox();
             this.label7 = new System.Windows.Forms.Label();
             this.textBoxDateRegistered = new System.Windows.Forms.TextBox();
             this.label6 = new System.Windows.Forms.Label();
@@ -62,8 +64,6 @@
             this.pictureBoxClock = new System.Windows.Forms.PictureBox();
             this.labelDateTime = new System.Windows.Forms.Label();
             this.timer = new System.Windows.Forms.Timer(this.components);
-            this.label2 = new System.Windows.Forms.Label();
-            this.textBoxOfferWashes = new System.Windows.Forms.TextBox();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxBarcode)).BeginInit();
             this.groupBox2.SuspendLayout();
@@ -173,11 +173,34 @@
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Στοιχεία Πελάτη";
             // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 25.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(161)));
+            this.label2.Location = new System.Drawing.Point(11, 204);
+            this.label2.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(294, 39);
+            this.label2.TabIndex = 26;
+            this.label2.Text = "Πλύσεις πακέτου:";
+            // 
+            // textBoxOfferWashes
+            // 
+            this.textBoxOfferWashes.Enabled = false;
+            this.textBoxOfferWashes.Font = new System.Drawing.Font("Microsoft Sans Serif", 25.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(161)));
+            this.textBoxOfferWashes.Location = new System.Drawing.Point(596, 204);
+            this.textBoxOfferWashes.Margin = new System.Windows.Forms.Padding(2);
+            this.textBoxOfferWashes.Name = "textBoxOfferWashes";
+            this.textBoxOfferWashes.ReadOnly = true;
+            this.textBoxOfferWashes.Size = new System.Drawing.Size(166, 46);
+            this.textBoxOfferWashes.TabIndex = 25;
+            this.textBoxOfferWashes.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            // 
             // label7
             // 
             this.label7.AutoSize = true;
             this.label7.Font = new System.Drawing.Font("Microsoft Sans Serif", 25.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(161)));
-            this.label7.Location = new System.Drawing.Point(13, 249);
+            this.label7.Location = new System.Drawing.Point(13, 253);
             this.label7.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(293, 39);
@@ -187,11 +210,11 @@
             // textBoxDateRegistered
             // 
             this.textBoxDateRegistered.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(161)));
-            this.textBoxDateRegistered.Location = new System.Drawing.Point(373, 260);
+            this.textBoxDateRegistered.Location = new System.Drawing.Point(310, 260);
             this.textBoxDateRegistered.Margin = new System.Windows.Forms.Padding(2);
             this.textBoxDateRegistered.Name = "textBoxDateRegistered";
             this.textBoxDateRegistered.ReadOnly = true;
-            this.textBoxDateRegistered.Size = new System.Drawing.Size(391, 31);
+            this.textBoxDateRegistered.Size = new System.Drawing.Size(454, 31);
             this.textBoxDateRegistered.TabIndex = 23;
             this.textBoxDateRegistered.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
@@ -455,29 +478,6 @@
             // 
             this.timer.Enabled = true;
             this.timer.Tick += new System.EventHandler(this.timer_Tick);
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 25.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(161)));
-            this.label2.Location = new System.Drawing.Point(11, 204);
-            this.label2.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(294, 39);
-            this.label2.TabIndex = 26;
-            this.label2.Text = "Πλύσεις πακέτου:";
-            // 
-            // textBoxOfferWashes
-            // 
-            this.textBoxOfferWashes.Enabled = false;
-            this.textBoxOfferWashes.Font = new System.Drawing.Font("Microsoft Sans Serif", 25.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(161)));
-            this.textBoxOfferWashes.Location = new System.Drawing.Point(596, 204);
-            this.textBoxOfferWashes.Margin = new System.Windows.Forms.Padding(2);
-            this.textBoxOfferWashes.Name = "textBoxOfferWashes";
-            this.textBoxOfferWashes.ReadOnly = true;
-            this.textBoxOfferWashes.Size = new System.Drawing.Size(166, 46);
-            this.textBoxOfferWashes.TabIndex = 25;
-            this.textBoxOfferWashes.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
             // MainForm
             // 
