@@ -5,11 +5,11 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("UserConsole")]
-[assembly: AssemblyDescription("")]
-[assembly: AssemblyConfiguration("")]
+[assembly: AssemblyTitle("AquaLine UserConsole")]
+[assembly: AssemblyDescription("AquaLine UserConsole")]
+[assembly: AssemblyConfiguration("AquaLine UserConsole")]
 [assembly: AssemblyCompany("Home")]
-[assembly: AssemblyProduct("UserConsole")]
+[assembly: AssemblyProduct("AquaLine UserConsole")]
 [assembly: AssemblyCopyright("Copyright © Home 2008")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]

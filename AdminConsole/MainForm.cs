@@ -110,7 +110,7 @@ namespace Aqua.Admin
                 return;
             }
 
-            if (custObjects[0] == null)
+            if (custObjects[0] == null && custObjects[1] == null)
             {
                 this.ClearAllTextBoxes(false);
                 MainLibrary.dummyFrm.MsgBoxError("Δεν υπάρχει πελάτης με αυτό το κωδικό κάρτας!");
@@ -253,7 +253,7 @@ namespace Aqua.Admin
             if (dr == DialogResult.Yes)
             {
                 this.library.DeleteBarcodeCustomer(textBoxBarCode.Text.Trim(), textBoxAbbreviation.Text.Trim());
-                this.library.DeleteBarcodeHistory(textBoxBarCode.Text.Trim());
+                //this.library.DeleteBarcodeHistory(textBoxBarCode.Text.Trim());
                 MainLibrary.dummyFrm.MsgBoxInformation("Διεγράφη με επιτυχία!", "Διαγραφή");
                 this.buttonNewCust_Click(sender, e);
             }
