@@ -9,6 +9,8 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>Aqua.Admin</RootNamespace>
     <AssemblyName>AdminConsole</AssemblyName>
+    <ApplicationIcon>aqua.ico</ApplicationIcon>
+    <StartupObject>Aqua.Admin.Program</StartupObject>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -75,6 +77,9 @@
       <Project>{E4C73AFE-9815-488F-8AB9-8206EC70D745}</Project>
       <Name>AquaLibrary</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="aqua.ico" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
